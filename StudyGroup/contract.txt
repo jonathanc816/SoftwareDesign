@@ -14,7 +14,7 @@ E. How will you keep track of who is doing which task and what is its status? Th
 - Discord bot
 
 F. If your team wants to have someone check in and make sure that each team member is doing okay and ask whether or not they could use more people on a task, who will that person be? Will that role be given to different people on different weeks? Alternatively, has everyone in the team agreed to report back to the rest of the team if a task turns out to be more time-consuming than originally assumed?
-- Zhi Heng Zheng
+- Zhi Heng (Justin) Zheng
 
 G. Is there anything else that your team has agreed on? If not, you can just write "No". 
 - No
