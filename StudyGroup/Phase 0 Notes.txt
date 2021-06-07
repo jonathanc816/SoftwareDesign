@@ -1,0 +1,58 @@
+CSC Notes
+
+
+InputController:
+    Enter value
+    Select value
+
+
+Template:
+    Instructions on how to create a game
+
+
+GameManager:
+    (Dictionary[User: [Games]])
+    Get all games created by user
+    get all public games
+    Create game according to template (template -> game)
+
+
+Game:
+    Given template instantiate
+    Answers
+    Solutions
+    Playing (InputController)
+    (Identifier of user that created)
+    
+
+User:
+    AdminUser/RegularUser
+    Username/passwords
+        User:
+            GameManager calls (Regular)
+        AdminUser:
+            GameManager calls (Admin)
+
+
+UserController:
+    Creating users
+    Logging in user
+
+
+
+Main:
+    ReadFile
+    Inputs (InputController)
+    Login/Create (call usercontroller)
+    Play (Game)
+
+
+
+Questions:
+What are games, quizzes, and templates whats the difference.
+Access games that other users have made public vs access templates that other users have made public
+How are games public/private
+Does the GameManager/User interaction work
+Between the things we chose which makes the most sense (Game storing user or gamemanager storing a list of users)
+What does the main function do
+Can users make new templates
