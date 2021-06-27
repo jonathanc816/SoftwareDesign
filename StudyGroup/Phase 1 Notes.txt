@@ -1,0 +1,21 @@
+IDEAS:
+Productivity App: TODO List app
+Calendar and Scheduling
+Email Client: 
+Study App combined with Calendar and Scheduling app: What you will do this week, 
+notifications for when you have something coming up.
+Word problem game for math:
+
+
+Tamagochi: Users users would have pets, you can feed pet, different types of pets (template), 
+    Pets: food meter, happiness, growth level (time), status, reminders (they talk to you)
+    Template: different animal things, different functionality for each pet
+    Interaction: Add friends, sending food to friends, share reminders with other, marry other pet(s)
+    Food: Productivity
+    List: List of reminders, list of friends
+
+
+Questions:
+Phase 0 marks
+Unique thing for a template
+CRC cards
