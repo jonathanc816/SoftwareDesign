@@ -1,21 +1,203 @@
-IDEAS:
-Productivity App: TODO List app
-Calendar and Scheduling
-Email Client: 
-Study App combined with Calendar and Scheduling app: What you will do this week, 
-notifications for when you have something coming up.
-Word problem game for math:
+MAYBE IN FUTURE: gifts, happiness level, growth level
 
 
 Tamagochi: Users users would have pets, you can feed pet, different types of pets (template), 
-    Pets: food meter, happiness, growth level (time), status, reminders (they talk to you)
-    Template: different animal things, different functionality for each pet
+    Pets: food meter, growth level (time), status, reminders (they talk to you)
+    Template: different types of actions
     Interaction: Add friends, sending food to friends, share reminders with other, marry other pet(s)
     Food: Productivity
     List: List of reminders, list of friends
 
+Login:
+User: ####
+Password: ####  
 
+New User:
+    Make a choice (Make a new pet, quit)
+
+User:
+    Username (unique)
+    Password
+    Users pet (object)
+    Reminders list
+    Inbox
+    Friends list
+    Amount of food int
+
+Make a new pet:
+    Name:
+    Color:
+    Sex:
+
+Pet:
+    Name
+    Color
+    Sex
+    Public/Private
+    Hunger level: /10
+    Growth level: count every day its full
+    id: unique identifier
+
+
+Existing User:
+    When you login the pet says something (bee fact if no reminders)
+    pet, make a reminder, make a message, mailbox, friends list (iteractions), settings(delete pet)
+
+Pet:
+    Status
+    Feed
+    Interact
+    Reminders
+
+Make a reminder:
+    Title: Title of the reminder
+    Description: Description of the reminder
+    Date due: 2021-06-28
+
+Reminder:
+    Title
+    Description
+    Date due
+    Completed: y/n
+    reminder_id
+
+
+Make a message:
+    To: (username)
+    Message: (content)
+
+Message(Friend Request)(Notice):
+    From: username
+    To: username
+    Content: text
+    id
+    (Notice):
+
+    (Friend Request):
+        Response: Accept/Reject
+        
+
+Entity Layer:
+    User:
+        Username (unique string)
+        Password (string)
+        Pet (Pet id)
+        Reminders (List of reminders)
+        Inbox (List of message ids)
+        Friends (List of usernames)
+        Food (int)
+        Getters
+        Setters
+        (Password Check)
+    (GuestUser):
+        username: guest
+        password: guest
+    (RegisteredUser):
+        Classified as registered user
+    (AdminUser):
+        Classified as admin
+
+    Pet:
+        Name (string)
+        Color (chosen from options)
+        Sex ()
+        Public/Private (bool)
+        Hunger level (int out of 10)
+        Growth level: counter of every day its full
+        id: unique identifier
+        status: dead/alive
+        Getter
+        Setter
+    
+    Template:
+        Instructions on how to format your text
+        Getter
+        Setter
+        Name
+        
+    Reminder:
+        Title (string)
+        Description (string)
+        Date due (java.time)
+        Completed (true/false)
+        Reminder id (unique int)
+        Getter
+        Setter
+
+    Message:
+        From (username)
+        To (username)
+        Content (string)
+        Getters
+    (Notice):
+    (Friend Request):
+        Response: Accept/Reject/null
+
+    
+Use Case Layer:
+    UserManager:
+        Store users (list)
+        Create users (method)
+        Log in users (method)
+        Current user (user object)
+    
+    PetManager:
+        Store pets (list)
+        Get pet based on id (method)
+        Create a new pet ()
+        Feed pet (method(user, amount, pet)) (check if public/private)
+        
+    TemplateManger:
+        Stores templates (list)
+        Edit template (Shows a list of templates for user to select)
+    
+    ReminderManager:
+        Stores reminders (list)
+        Get reminder based on id(s) (method (list))
+        Add to storage (Reminder)
+
+    ActionCreator:
+        Input a template and strings and ouput a reminder or message
+            Different types of templates:
+                Message
+                Reminder
+
+    MessageManager:
+        Stores messages (list)
+        Get message based on id
+        Send messages between users (add message to the to users mailbox)
+        Add to messages (Message)
+    
+Controller/Gateway Layer:
+    Main:
+        Instantiate and store instances of all the Managers
+        Instantiate a session and pass inputs into session
+    Session:
+        Creates/Attempts to authenticate a user (UserManager)
+        Store the user object as the authenticated user
+        Output the next upcoming reminder
+        Takes input from main and inputs them into use case classes (options):
+            Make a new pet:
+                Call PetManager and input the strings necessary for pet
+            Interact with pet:
+                Status:
+                    Given the hunger value output some string that reflects the status of the pet
+                Feed:
+                    Call the PetManager function with the current user as the user, the amount provided, and the current users pet_id as the pet_id
+                Interact:
+
+                Reminders:
+                    List current reminders
+                    Prompt user for extra option to mark as complete
+            Make a reminder:
+                Get template from TemplateManger and call ActionCreators create reminder function with the title description and date due.
+                Input that Reminder into ReminderManagers add function and add reminder_id to users reminder list
+            Make a message:
+                Get template from TemplateManger and call ActionCreators create reminder function with to, from and content
+                Input the Message into MessageManagers add function and send function
+            
 Questions:
 Phase 0 marks
-Unique thing for a template
+Unique thing for a template (ask what is a template)
 CRC cards
+Password checking

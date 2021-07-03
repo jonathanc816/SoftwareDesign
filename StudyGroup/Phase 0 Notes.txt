@@ -1,58 +1,124 @@
 CSC Notes
 
+Requirements:
+1. Handle a single word game template that is stored in a file outside the program
+and is read through main
 
-InputController:
-    Enter value
-    Select value
+2. Users with the properties of: logging in, username/password, list of their games
+able to create new games, access other public games. Admin users can edit templates but 
+cannot create games.
 
+3. Main class that calls controller classes, you must show where input from the user will be
+read.
+
+Basic ideas:
+Since we need to list both games created by the user and all public games, it's better to
+create a list of games, with a user id attatched to them, as it is easier to list both of 
+these things.
+
+Main should handle instantiation of use case layer objects, and focus on gateway items
+such as reading files and user inputs, but rely on another controller class
+to carry out those inputs.
+
+To allow for expandability, multiple types of User classes should be able to be
+created in the future. Having Admin and Regular users as subclasses of a User superclass
+allows us to easily add new types of users in the future.
+
+Although we now only need to worry about one template, in the future we might have
+to worry about more templates and creating and editing those templates, therefore
+there is probably a need for a template manager.
+
+Since some things are abstract (what a game is, what a template will look like),
+I have abstracted those concepts into "game information" and "instructions on how to create the game"
+to allow for further changes in the future.
+
+
+
+Entities:
+
+Game(Questions, Answers, Identifier):
+    Game information
+    (Identifier of user that created)
+    Public/Private bool
+    Getter for everything
+
+User:
+    User identifier (not username, some unique integer)
+    Username
+    Password
+    Getter for username/password and user identifier
+    Subclasses:
+        AdminUser
+        RegularUser
 
 Template:
     Instructions on how to create a game
+    Getter for these instructions
+
+
+Use Case Layer:
+
+TemplateManager:
+    Stores templates
+    Edit a template
+    Create amd store new template from file
+    Getter for a list of templates
+    
 
 
 GameManager:
-    (Dictionary[User: [Games]])
+    Store all games
     Get all games created by user
-    get all public games
+    Get all public games
     Create game according to template (template -> game)
 
 
-Game:
-    Given template instantiate
-    Answers
-    Solutions
-    Playing (InputController)
-    (Identifier of user that created)
-    
-
-User:
-    AdminUser/RegularUser
-    Username/passwords
-        User:
-            GameManager calls (Regular)
-        AdminUser:
-            GameManager calls (Admin)
-
-
-UserController:
+UserManager:
     Creating users
-    Logging in user
+    Store users
+    Logging in user (Verify input username/password is the same as the stored, returns the user)
 
+
+Controllers:
+
+SessionController (Controls a session for a user.)
+    Creates/Attempts to authenticate a user (UserManager)
+    Stores a temporary version of the authenticated user.
+    Takes input from Main and puts their input into use case classes while checking for user permissions:
+        (Regular User) Select a template and create a game (Public/Private) (TemplateManager) (GameManager)
+        (Regular User) Show list of own games (GameManager)
+        Show list of public games (GameManager)
+        (Admin) Edit template (TemplateManager)
 
 
 Main:
-    ReadFile
-    Inputs (InputController)
-    Login/Create (call usercontroller)
-    Play (Game)
+    Instantiate instances of GameManager, UserMananger and TemplateManager
+    Read template files and make them into templates (TemplateManager)
+    Call SessionController and pass in inputs.
+
 
 
 
 Questions:
-What are games, quizzes, and templates whats the difference.
-Access games that other users have made public vs access templates that other users have made public
-How are games public/private
+Q: Is it ok if we have the same idea.
+A: As long as our descriptions are different it is ok.
+
+Q: What are games, quizzes, and templates whats the difference. 
+A: Games are able to play, quizzes can participate, they are two different type of creatable objects, under the project domain. For the template, it is a thing that can
+guide how to play that game or the functionality of the game. It can be abstract because this is just phase 0, you can add details to the description in your submission
+to show how they work together. (All projects should have Template as a class)
+
+
+Q: How are games public/private
+A: The games have a public/private attribute, 
+
+
 Does the GameManager/User interaction work
 Between the things we chose which makes the most sense (Game storing user or gamemanager storing a list of users)
-What does the main function do
-Can users make new templates
+
+Q: What does the main function do
+A: Main function can be anything, maybe calls a lot of the use case layer.
+
+
+Q: Can users make new templates
+A: It is not specified.
