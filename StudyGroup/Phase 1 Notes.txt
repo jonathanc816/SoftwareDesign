@@ -3,14 +3,14 @@ MAYBE IN FUTURE: gifts, happiness level, growth level
 
 Tamagochi: Users users would have pets, you can feed pet, different types of pets (template), 
     Pets: food meter, growth level (time), status, reminders (they talk to you)
-    Template: different types of actions
+    Template: different types of actions (ask)
     Interaction: Add friends, sending food to friends, share reminders with other, marry other pet(s)
     Food: Productivity
     List: List of reminders, list of friends
 
 Login:
 User: ####
-Password: ####  
+Password: ####
 
 New User:
     Make a choice (Make a new pet, quit)
@@ -77,8 +77,8 @@ Message(Friend Request)(Notice):
         Response: Accept/Reject
         
 
-Entity Layer:
-    User:
+Entity Layer (signatures):
+    User: Jonathan/Alex
         Username (unique string)
         Password (string)
         Pet (Pet id)
@@ -97,7 +97,7 @@ Entity Layer:
     (AdminUser):
         Classified as admin
 
-    Pet:
+    Pet: Justin
         Name (string)
         Color (chosen from options)
         Sex ()
@@ -109,13 +109,13 @@ Entity Layer:
         Getter
         Setter
     
-    Template:
+    Template: Yupeng
         Instructions on how to format your text
         Getter
         Setter
         Name
         
-    Reminder:
+    Reminder: Angela
         Title (string)
         Description (string)
         Date due (java.time)
@@ -124,7 +124,7 @@ Entity Layer:
         Getter
         Setter
 
-    Message:
+    Message: Kelvin/Jeannie
         From (username)
         To (username)
         Content (string)
@@ -135,34 +135,33 @@ Entity Layer:
 
     
 Use Case Layer:
-    UserManager:
+    UserManager: Jonathan/Alex
         Store users (list)
         Create users (method)
-        Log in users (method)
+        Log in users (method) # depends if hashed passwords or not
         Current user (user object)
-    
-    PetManager:
+    PetManager: Justin
         Store pets (list)
         Get pet based on id (method)
         Create a new pet ()
         Feed pet (method(user, amount, pet)) (check if public/private)
         
-    TemplateManger:
+    TemplateManger: Yupeng
         Stores templates (list)
         Edit template (Shows a list of templates for user to select)
     
-    ReminderManager:
+    ReminderManager: Angela
         Stores reminders (list)
         Get reminder based on id(s) (method (list))
         Add to storage (Reminder)
 
-    ActionCreator:
+    ActionCreator: Yupeng
         Input a template and strings and ouput a reminder or message
             Different types of templates:
                 Message
                 Reminder
 
-    MessageManager:
+    MessageManager: Kelvin/Jeannie
         Stores messages (list)
         Get message based on id
         Send messages between users (add message to the to users mailbox)
