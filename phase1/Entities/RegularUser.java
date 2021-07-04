@@ -1,7 +1,7 @@
 import java.util.Hashtable;
 
 public class RegularUser extends User {
-    RegularUser(String username, Hashtable password){
+    public RegularUser(String username, String password){
         super(username, password);
     }
 }
