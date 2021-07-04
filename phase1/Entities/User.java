@@ -7,9 +7,9 @@ public class User {
     private String password; // Can input it as a hashed string and have a hashing function in the UserManager class
     private static int petId; // CamelCase convention
     private int food;
-    private ArrayList<Integer> inbox;
-    private ArrayList<Integer> reminderList;
-    private ArrayList<Integer> friendList;
+    private final ArrayList<Integer> inbox; // setting these to final because we never will reassign them
+    private final ArrayList<Integer> reminderList;
+    private final ArrayList<Integer> friendList;
 
 
 
@@ -42,7 +42,5 @@ public class User {
     public ArrayList<Integer> getReminders() { return this.reminderList; }
 
     public ArrayList<Integer> getFriendList() { return this.friendList; }
-
-
 
 }
