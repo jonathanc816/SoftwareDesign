@@ -138,8 +138,9 @@ Use Case Layer:
     UserManager: Jonathan/Alex
         Store users (list)
         Create users (method)
-        Log in users (method) # depends if hashed passwords or not
+        Log in users (method) # passwords are hashed
         Current user (user object)
+        Check if username is in use (method)
     PetManager: Justin
         Store pets (list)
         Get pet based on id (method)
