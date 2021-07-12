@@ -1,20 +1,20 @@
 public class Message {
-    private final User fromID;
-    private User toID;
+    private final String fromID;
+    private String toID;
     private String content;
 
-    public Message(User fromID, User toID, String content) {
+    public Message(String fromID, String toID, String content) {
         this.fromID = fromID;
         this.toID = toID;
         this.content = content;
     }
     public String getContent(){return this.content;}
 
-    public String getFromID(){return this.fromID.getUsername();}
+    public String getFromID(){return this.fromID;}
 
-    public String getToID(){return this.toID.getUsername();}
+    public String getToID(){return this.toID;}
 
     public void setContent(String newContent){this.content = newContent;}
 
-    public void setToID(User newToID){this.toID = newToID;}
+    public void setToID(String newToID){this.toID = newToID;}
 }
