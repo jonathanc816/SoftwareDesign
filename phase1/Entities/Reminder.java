@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public class Reminder {
     private final String title;
     private final String description;
@@ -8,8 +10,8 @@ public class Reminder {
     /**
      * The constructor of Reminder
      *
-     * @param Title       The unique title of a reminder
-     * @param Description The contant of the reminder
+     * @param title       The unique title of a reminder
+     * @param description The content of the reminder
      * @param dateDue     The due date of the reminder
      * @param completed   Whether the things in reminder is done (can be changed by user)
      * @param reminderId  the unique id of the reminder
@@ -30,7 +32,7 @@ public class Reminder {
         return description;
     }
 
-    public int getDateDue() {
+    public Date getDateDue() {
         return dateDue;
     }
 
