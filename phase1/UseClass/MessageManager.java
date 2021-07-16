@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *    Stores messages (list)
  *    Get message based on id
@@ -13,11 +16,12 @@ public class MessageManager{
 
     public Message getMessage(String id){
         for (int i=0;i<messageList.size();i++) {
-            Message currMessage = messageList.get(i)
-            if (currMessage.getMessageId() == id) {
+            Message currMessage = messageList.get(i);
+            if (currMessage.getFromID() == id) {
                 return currMessage;
             }
         }
+        return null;
     }
 
     public void addMessage(Message message){
