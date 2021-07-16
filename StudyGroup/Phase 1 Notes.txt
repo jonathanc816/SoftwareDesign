@@ -165,7 +165,7 @@ Use Case Layer:
     MessageManager: Kelvin/Jeannie
         Stores messages (list)
         Get message based on id
-        Send messages between users (add message to the to users mailbox)
+        Send messages between users (add message to users mailbox)
         Add to messages (Message)
     
 Controller/Gateway Layer:
