@@ -7,7 +7,7 @@ public class User {
     private int food;
     private final ArrayList<Integer> inbox; // setting these to final because we never will reassign them
     private final ArrayList<Integer> reminderList;
-    private final ArrayList<Integer> friendList;
+    private final ArrayList<String> friendList; //temporary changed to String, it was Integer before
 
 
 
@@ -18,7 +18,7 @@ public class User {
         this.food = 0;
         this.inbox = new ArrayList<Integer>();
         this.reminderList = new ArrayList<Integer>();
-        this.friendList = new ArrayList<Integer>();
+        this.friendList = new ArrayList<String>();
     }
 
     public String getUsername() { return this.username; }
@@ -39,6 +39,6 @@ public class User {
 
     public ArrayList<Integer> getReminders() { return this.reminderList; }
 
-    public ArrayList<Integer> getFriendList() { return this.friendList; }
+    public ArrayList<String> getFriendList() { return this.friendList; }
 
 }
