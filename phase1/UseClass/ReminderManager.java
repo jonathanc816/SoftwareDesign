@@ -1,3 +1,6 @@
+import java.util.Date;
+import java.util.List;
+
 public class ReminderManager {
     /**
      * Stores reminders (list)
@@ -18,17 +21,16 @@ public class ReminderManager {
     {
         reminderList.add(reminder);
     }
-    public  Reminder getReminder(String reminderId)
-    {
-        for (int i=0;i<reminderList.size();i++)
-        {
-            Reminder currReminder=reminderList.get(i)
 
-            if (currReminder.getReminderId()==reminderId)
-            {
+    public  Reminder getReminder(int reminderId)
+    {
+        for (Reminder currReminder : reminderList) {
+            if (currReminder.getReminderId() == reminderId) {
                 return currReminder;
             }
 
         }
+        return new Reminder("", "", new Date(), false, 0);
+        //should raise an error or return an empty reminder if reminderId not in list
     }
 }
