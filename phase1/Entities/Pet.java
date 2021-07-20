@@ -53,11 +53,11 @@ public class Pet {
     }
 
     public void increaseHungerLevel(int level){
-        this.hungerLevel += level;
+        this.hungerLevel = Math.min(10, this.hungerLevel + level);
     }
 
     public void decreaseHungerLevel(int level){
-        this.hungerLevel -= level;
+        this.hungerLevel = Math.max(0, this.hungerLevel - level);
     }
 
     public int getGrowthLevel(){
