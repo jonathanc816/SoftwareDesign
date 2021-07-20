@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class User {
     private String username;
     private String password; // Can input it as a hashed string and have a hashing function in the UserManager class
-    private static int petId; // CamelCase convention
+    private int petId; // CamelCase convention
     private int food;
     private final ArrayList<Integer> inbox; // setting these to final because we never will reassign them
     private final ArrayList<Integer> reminderList;
@@ -29,7 +29,7 @@ public class User {
 
     public void setPassword(String new_pass) { this.password = new_pass; } // should only pass in hashed passwords
 
-    public static int getPetId(){ return petId; }
+    public int getPetId(){ return petId; }
 
     public int getFood() { return this.food; }
 
