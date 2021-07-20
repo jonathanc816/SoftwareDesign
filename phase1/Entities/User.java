@@ -1,24 +1,28 @@
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 
 public class User {
+    private static int globalPetId; // CamelCase convention
     private String username;
     private String password; // Can input it as a hashed string and have a hashing function in the UserManager class
-    private int petId; // CamelCase convention
+    private final int userPetId;
     private int food;
     private final ArrayList<Integer> inbox; // setting these to final because we never will reassign them
     private final ArrayList<Integer> reminderList;
-    private final ArrayList<String> friendList; //temporary changed to String, it was Integer before
+    private final ArrayList<Integer> friendList;
 
 
 
     public User(String username, String password){
         this.username = username;
         this.password = password;
-        petId += 1;
+        this.userPetId = globalPetId;
+        globalPetId += 1;
         this.food = 0;
         this.inbox = new ArrayList<Integer>();
         this.reminderList = new ArrayList<Integer>();
-        this.friendList = new ArrayList<String>();
+        this.friendList = new ArrayList<Integer>();
     }
 
     public String getUsername() { return this.username; }
@@ -29,7 +33,7 @@ public class User {
 
     public void setPassword(String new_pass) { this.password = new_pass; } // should only pass in hashed passwords
 
-    public int getPetId(){ return petId; }
+    public int getPetId(){ return userPetId; }
 
     public int getFood() { return this.food; }
 
@@ -39,6 +43,6 @@ public class User {
 
     public ArrayList<Integer> getReminders() { return this.reminderList; }
 
-    public ArrayList<String> getFriendList() { return this.friendList; }
+    public ArrayList<Integer> getFriendList() { return this.friendList; }
 
 }
