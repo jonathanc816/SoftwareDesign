@@ -48,7 +48,7 @@ public class TemplateManager {
                 return template;
             }
         }
-        return new Template("", "", 0, "", new String[0]);
+        return null;
     }
 
     /**
