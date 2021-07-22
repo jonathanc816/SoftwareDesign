@@ -13,7 +13,6 @@ public class User {
     private final ArrayList<Integer> friendList;
 
 
-
     public User(String username, String password){
         this.username = username;
         this.password = password;
