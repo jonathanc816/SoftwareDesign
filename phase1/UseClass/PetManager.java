@@ -9,25 +9,18 @@ public class PetManager {
 
   private List<Pet> petList;
 
-  /** This method returns the list of Pet objects stored */
   public List<Pet> getPetList() {
     return petList;
   }
 
-  /**
-   * This method changes petList based on the list given
-   *
-   * @param newPetList this is the new list that will replace the existing petList
-   */
   public void setPetList(List<Pet> newPetList) {
     this.petList = newPetList;
   }
 
-  /**
-   * This method adds one Pet object to petList
-   *
-   * @param newPet this is the new Pet object
-   */
+  public void noPetFound(){
+    System.out.println("This pet cannot be found.");
+  }
+
   public void addPet(Pet newPet) {
     this.petList.add(newPet);
   }
@@ -44,6 +37,7 @@ public class PetManager {
         return pet;
       }
     }
+    noPetFound();
     return null;
   }
 
@@ -55,17 +49,16 @@ public class PetManager {
     return newPet;
   }
 
-  /**
-   * This method checks if the Pet object is public or private
-   *
-   * @param pet This is the Pet object to check
-   */
-  public String checkPublicity(Pet pet) {
-    if (pet.getPublicity()) {
-      return "This pet is public.";
-    } else {
-      return "This pet is private.";
-    }
+  public String checkPublicity(int petID) {
+    Pet petToCheck = findPet(petID);
+    if (petToCheck != null) {
+      if (petToCheck.getPublicity()) {
+        return "This pet is public.";
+      } else {
+        return "This pet is private.";
+      }
+      }
+    return "This pet cannot be found.";
   }
 
   /**
@@ -75,9 +68,34 @@ public class PetManager {
    * @param amount This is the amount we want to feed
    */
   public void feedPet(int petID, int amount) {
-    var petToFeed = findPet(petID);
+    Pet petToFeed = findPet(petID);
     if (petToFeed != null) {
       petToFeed.increaseHungerLevel(amount);
+    } else {
+      noPetFound();
     }
+  }
+
+  public void changePetName(int petID, String newPetName){
+    Pet petToName = findPet(petID);
+    if (petToName != null){
+      petToName.setPetName(newPetName);
+    } else {
+      noPetFound();
+    }
+  }
+
+  public String updatePetStatus(int petID){
+    Pet petToUpdate = findPet(petID);
+    if (petToUpdate != null){
+      if (petToUpdate.getHungerLevel() >= 6){
+        return "This pet is healthy.";
+      } else if (petToUpdate.getHungerLevel() == 0){
+        return "This pet has fainted.";
+      } else if (petToUpdate.getHungerLevel() <= 5){
+        return "This pet is hungry.";
+      }
+    }
+    return "This pet cannot be found.";
   }
 }
