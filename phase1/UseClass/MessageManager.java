@@ -19,11 +19,8 @@ public class MessageManager{
 
     public void addMessage(Message newMessage){
         this.messageDict.put(messageID, newMessage.getContent());
+        messageID += 1;
     }
 
-    public String getMessage(Integer messageID){
-        return messageDict.get(messageID);
-    }
-
-
+    public String getMessage(Integer messageID){return messageDict.get(messageID);}
 }
