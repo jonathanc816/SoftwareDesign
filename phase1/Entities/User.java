@@ -3,6 +3,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 public class User {
+    private boolean isAdmin;
     private static int globalPetId; // CamelCase convention
     private String username;
     private String password; // Can input it as a hashed string and have a hashing function in the UserManager class
@@ -13,15 +14,16 @@ public class User {
     private final ArrayList<Integer> friendList;
 
 
-    public User(String username, String password){
+    public User(String username, String password, Boolean isAdmin){
+        this.isAdmin = isAdmin;
         this.username = username;
         this.password = password;
         this.userPetId = globalPetId;
         globalPetId += 1;
         this.food = 0;
-        this.inbox = new ArrayList<Integer>();
-        this.reminderList = new ArrayList<Integer>();
-        this.friendList = new ArrayList<Integer>();
+        this.inbox = new ArrayList<>();
+        this.reminderList = new ArrayList<>();
+        this.friendList = new ArrayList<>();
     }
 
     public String getUsername() { return this.username; }
@@ -44,4 +46,7 @@ public class User {
 
     public ArrayList<Integer> getFriendList() { return this.friendList; }
 
+    public boolean hasAuthority() {
+        return isAdmin;
+    }
 }

@@ -1,4 +1,8 @@
 public class Presenter {
+    static public void showInstruction(String s) {
+        System.out.println(s);
+    }
+
     static public void showMenu(String[] menu) {
         int i = 1;
         for (String line : menu){
