@@ -4,7 +4,9 @@ import java.util.ArrayList;
 public class GameController {
     static public String getUserString() {
         Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
+        String userInput = sc.nextLine();
+        System.out.println();
+        return userInput;
     }
 
     static public int getUserNum(int maxNum) {
@@ -17,6 +19,7 @@ public class GameController {
         while (true) {
             String userChoice = sc.nextLine();
             if (choices.contains(userChoice)) {
+                System.out.println();
                 return Integer.parseInt(userChoice);
             }
             System.out.println("Invalid number, please enter again");
@@ -38,6 +41,7 @@ public class GameController {
         while (true) {
             String userInput = sc.nextLine();
             if (p.check(userInput)) {
+                System.out.println();
                 return userInput;
             }
             System.out.println(p.warning());
@@ -54,6 +58,7 @@ public class GameController {
         while (true) {
             String userInput = sc.nextLine();
             if (userInput.equals("y") || userInput.equals("n")) {
+                System.out.println();
                 return userInput.equals("y");
             }
             System.out.println("Invalid choice, enter 'y' for yes or 'n' for no");
