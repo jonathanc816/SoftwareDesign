@@ -37,8 +37,22 @@ public class UserController {
         String username = GameController.getUserString("Please enter your user name...");
         String password = GameController.getUserString("Please enter the password...");
         if (UserManager.login(username, password)){
-            Presenter.showInstruction("Welcome back! "+UserManager.currentUser.getUsername()+". choose your option");
-            Presenter.showMenu(new String[] {"Pet", "Mailbox", "Friends"});
+            boolean back = false;
+            while (!back) {
+                Presenter.showInstruction("Welcome back! "+UserManager.currentUser.getUsername()+". choose your option");
+                Presenter.showMenu(new String[] {"Pet", "Mailbox", "Friends", "Logout"});
+                int userChoice = GameController.getUserNum(4);
+                if (userChoice == 1) {
+                    System.out.println("TODO: see pet");
+                }
+                else if (userChoice == 2) {
+                    MessageController.mailbox();
+                }
+                else if (userChoice == 3){
+                    System.out.println("TODO: friends");
+                }
+                else {back = true;}
+            }
         }
         else {
             Presenter.showInstruction("Wrong username or password!");

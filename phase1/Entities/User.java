@@ -3,7 +3,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 public class User {
-    private boolean isAdmin;
+    private final boolean isAdmin;
     private static int globalPetId; // CamelCase convention
     private String username;
     private String password; // Can input it as a hashed string and have a hashing function in the UserManager class
@@ -11,7 +11,7 @@ public class User {
     private int food;
     private final ArrayList<Integer> inbox; // setting these to final because we never will reassign them
     private final ArrayList<Integer> reminderList;
-    private final ArrayList<Integer> friendList;
+    private final ArrayList<String> friendList; //usernames of friends
 
 
     public User(String username, String password, Boolean isAdmin){
@@ -40,11 +40,17 @@ public class User {
 
     public void setFood(int food) { this.food = food; }
 
-    public ArrayList<Integer> getInbox(){ return this.inbox; }
+    public ArrayList<Integer> getInbox() { return this.inbox; }
+
+    public void addInboxId(int messageId) {inbox.add(messageId);}
 
     public ArrayList<Integer> getReminders() { return this.reminderList; }
 
-    public ArrayList<Integer> getFriendList() { return this.friendList; }
+    public void addReminderId(int reminderId) {reminderList.add(reminderId);}
+
+    public ArrayList<String> getFriendList() { return this.friendList; }
+
+    public void addFriendName(String username) {friendList.add(username);}
 
     public boolean hasAuthority() {
         return isAdmin;

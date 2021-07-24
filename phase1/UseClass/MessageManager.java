@@ -9,18 +9,27 @@ import java.util.HashMap;
  */
 public class MessageManager{
 
-    private static Integer messageID;
-    public HashMap<Integer, String> messageDict;
+    static private Integer messageID = 0;
+    static public HashMap<Integer, Message> messageDict = new HashMap<Integer, Message>();
 
-    public MessageManager(){
-        this.messageDict = new HashMap<>();
-        messageID = 0;
+    static public int createMessage(String fromName, String toName, String content) {
+        Message message = new Message(fromName, toName, content);
+        addMessage(message);
+        return messageID;
     }
 
-    public void addMessage(Message newMessage){
-        this.messageDict.put(messageID, newMessage.getContent());
+    static public void addMessage(Message newMessage){
+        messageDict.put(messageID, newMessage);
         messageID += 1;
     }
 
-    public String getMessage(Integer messageID){return messageDict.get(messageID);}
+    static public Message getMessage(Integer messageID){return messageDict.get(messageID);}
+
+    static public ArrayList<Message> getMessages(ArrayList<Integer> messageIds) {
+        ArrayList<Message> messages = new ArrayList<Message>();
+        for (int id : messageIds) {
+            messages.add(getMessage(id));
+        }
+        return messages;
+    }
 }
