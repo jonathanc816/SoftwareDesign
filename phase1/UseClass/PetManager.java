@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * This is the class that stores and manages Pet objects
@@ -7,22 +8,22 @@ import java.util.List;
  */
 public class PetManager {
 
-  private List<Pet> petList;
+  static private List<Pet> petList = new ArrayList<>();
 
-  public List<Pet> getPetList() {
+  static public List<Pet> getPetList() {
     return petList;
   }
 
-  public void setPetList(List<Pet> newPetList) {
-    this.petList = newPetList;
+  static public void setPetList(List<Pet> newPetList) {
+    petList = newPetList;
   }
 
-  public void noPetFound(){
+  static  public void noPetFound(){
     System.out.println("This pet cannot be found.");
   }
 
-  public void addPet(Pet newPet) {
-    this.petList.add(newPet);
+  static public void addPet(Pet newPet) {
+    petList.add(newPet);
   }
 
   /**
@@ -31,7 +32,7 @@ public class PetManager {
    *
    * @param petID this is the ID of the pet we are looking for
    */
-  public Pet findPet(int petID) {
+  static public Pet findPet(int petID) {
     for (Pet pet : petList) {
       if (pet.getId() == petID) {
         return pet;
@@ -42,14 +43,14 @@ public class PetManager {
   }
 
   /** This method creates a new Pet object, adds it to petList, and returns it */
-  public Pet createPet(
+  static public Pet createPet(
       String petName, int id, String petColour, String petSex, boolean publicity, String status) {
     Pet newPet = new Pet(petName, id, petColour, petSex, publicity, status);
     addPet(newPet);
     return newPet;
   }
 
-  public String checkPublicity(int petID) {
+  static public String checkPublicity(int petID) {
     Pet petToCheck = findPet(petID);
     if (petToCheck != null) {
       if (petToCheck.getPublicity()) {
@@ -67,7 +68,7 @@ public class PetManager {
    * @param petID This is the Pet object to feed
    * @param amount This is the amount we want to feed
    */
-  public void feedPet(int petID, int amount) {
+  static public void feedPet(int petID, int amount) {
     Pet petToFeed = findPet(petID);
     if (petToFeed != null) {
       petToFeed.increaseHungerLevel(amount);
@@ -76,7 +77,7 @@ public class PetManager {
     }
   }
 
-  public void changePetName(int petID, String newPetName){
+  static public void changePetName(int petID, String newPetName){
     Pet petToName = findPet(petID);
     if (petToName != null){
       petToName.setPetName(newPetName);
@@ -85,7 +86,7 @@ public class PetManager {
     }
   }
 
-  public String updatePetStatus(int petID){
+  static public String updatePetStatus(int petID){
     Pet petToUpdate = findPet(petID);
     if (petToUpdate != null){
       if (petToUpdate.getHungerLevel() >= 6){

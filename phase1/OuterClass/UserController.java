@@ -6,8 +6,31 @@ public class UserController {
         boolean isAdmin = GameController.getUserYesOrNo("Are you a admin user? (y/n)");
         User newUser = UserManager.createUser(username, password, isAdmin);
         UserManager.addUser(newUser);
+
         Presenter.showInstruction("Welcome! " + username + ". Now choose your pet!");
-        // TODO create pet
+        createUserPet();
+    }
+
+    static public void createUserPet() {
+        User currentUser = UserManager.currentUser;
+        String petName = GameController.getUserString("Please enter the name of your pet...");
+
+        String[] colours = new String[] {"red", "yellow", "blue", "green"};
+        Presenter.showMenu(colours, "Please set the colour (enter number to select)");
+        String petColour = colours[GameController.getUserNum(4) - 1];
+
+        String[] sex = new String[] {"male", "female"};
+        Presenter.showMenu(sex, "Please set sex of your pet (enter number to select)");
+        String petSex = sex[GameController.getUserNum(2) - 1];
+
+        boolean petPublicity =
+                GameController.getUserYesOrNo("Would you like to make your pet public to your friends? (y/n)");
+
+        Pet newPet = PetManager.createPet(
+                petName, currentUser.getPetId(), petColour, petSex, petPublicity, "No Status");
+        Presenter.showInstruction(
+                "Congratulations! "+currentUser.getUsername()+". You now have a "+petColour+"," +
+                        " "+petSex+" pet called "+petName+". Login to see more.");
     }
 
     static public void userLogin() {

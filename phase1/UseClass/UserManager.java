@@ -25,6 +25,7 @@ public class UserManager{
 
     public static void addUser(User user) {
         userList.add(user);
+        currentUser = user;
     }
 
     public static void addUsers(List<User> users) {
