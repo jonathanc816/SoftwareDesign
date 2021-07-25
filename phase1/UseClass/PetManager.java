@@ -54,9 +54,9 @@ public class PetManager {
     Pet petToCheck = findPet(petID);
     if (petToCheck != null) {
       if (petToCheck.getPublicity()) {
-        return "This pet is public.";
+        return "public";
       } else {
-        return "This pet is private.";
+        return "private";
       }
       }
     return "This pet cannot be found.";

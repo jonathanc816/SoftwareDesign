@@ -23,11 +23,11 @@ public class UserController {
         Presenter.showMenu(sex, "Please set sex of your pet (enter number to select)");
         String petSex = sex[GameController.getUserNum(2) - 1];
 
-        boolean petPublicity =
-                GameController.getUserYesOrNo("Would you like to make your pet public to your friends? (y/n)");
+//        boolean petPublicity =
+//                GameController.getUserYesOrNo("Would you like to make your pet public to your friends? (y/n)");
 
         Pet newPet = PetManager.createPet(
-                petName, currentUser.getPetId(), petColour, petSex, petPublicity, "No Status");
+                petName, currentUser.getPetId(), petColour, petSex, true, "No Status");
         Presenter.showInstruction(
                 "Congratulations! "+currentUser.getUsername()+". You now have a "+petColour+"," +
                         " "+petSex+" pet called "+petName+". Login to see more.");
@@ -43,14 +43,13 @@ public class UserController {
                 Presenter.showMenu(new String[] {"Pet", "Mailbox", "Friends", "Logout"});
                 int userChoice = GameController.getUserNum(4);
                 if (userChoice == 1) {
-                    System.out.println("TODO: see pet");
-                    MessageController.createMessage();
+                    PetController.petMenu();
                 }
                 else if (userChoice == 2) {
                     MessageController.mailbox();
                 }
                 else if (userChoice == 3){
-                    System.out.println("TODO: friends");
+                    FriendController.friendMenu();
                 }
                 else {back = true;}
             }

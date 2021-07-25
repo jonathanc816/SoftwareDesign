@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MessageController {
+    static String friendRequest = "Can we make friends?";
 
     static public void mailbox() {
         boolean back = false;
@@ -18,7 +19,7 @@ public class MessageController {
             else {
                 ArrayList<String> fromIdList = new ArrayList<String>();
                 for (Message message : messages) {
-                    fromIdList.add("From: "+message.getFromID());
+                    fromIdList.add("A message from: "+message.getFromID());
                 }
                 fromIdList.add("Back");
 
@@ -38,7 +39,25 @@ public class MessageController {
     static public void seeMessage(Message message) {
         Presenter.showInstruction(
                 "From: "+message.getFromID()+"  To: "+message.getToID()+"\nContent: "+message.getContent()+"\n");
-        GameController.getUserString("Enter any letter to go back");
+        if (message.getContent().equals(friendRequest)) {
+            boolean UserInput = GameController.getUserYesOrNo(
+                    "Enter 'y' to accept this friend request or 'n' to ignore");
+            if (UserInput) {
+                User fromUser = UserManager.getUserByName(message.getFromID());
+                User toUser = UserManager.getUserByName(message.getToID());
+                fromUser.addFriendName(toUser.getUsername());
+                toUser.addFriendName(fromUser.getUsername());
+                GameController.getUserString("You are friends with "+message.getFromID()+
+                        " now. Enter any letter to go back");
+            }
+            else {
+                GameController.getUserString("You have ignored this friend request, " +
+                        "Enter any letter to go back");
+            }
+        }
+        else {
+            GameController.getUserString("Enter any letter to go back");
+        }
     }
 
     static public void createMessage() {
@@ -54,5 +73,10 @@ public class MessageController {
         else {
             Presenter.showInstruction("Unfortunately, Your pet couldn't find the addressee. Please try again.");
         }
+    }
+
+    static public void createFriendRequest(String fromId, String toId) {
+        int messageID = MessageManager.createMessage(fromId, toId, friendRequest);
+        Objects.requireNonNull(UserManager.getUserByName(toId)).addInboxId(messageID);
     }
 }
