@@ -1,38 +1,35 @@
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.List;
 
-public class UserManager{
-    static ArrayList<User> userList = new ArrayList<>();
+public class UserManager implements Serializable {
+    static HashMap<String, User> userList = new HashMap<>();
     static User currentUser = null;
 
     public static boolean isUserExist(String name) {
-        for (User user : userList) {
-            if (user.getUsername().equals(name)) {
-                return true;
-            }
-        }
-        return false;
+        return userList.containsKey(name);
     }
 
     public static User getUserByName(String name) {
-        for (User user : userList) {
-            if (user.getUsername().equals(name)) {
-                return user;
-            }
-        }
-        return null;
+        return userList.get(name);
     }
 
     public static void addUser(User user) {
-        userList.add(user);
+        userList.put(user.getUsername(), user);
         currentUser = user;
     }
 
     public static void addUsers(List<User> users) {
-        userList.addAll(users);
+        for (User x : users) {
+            userList.put(x.getUsername(), x);
+        }
     }
 
     public static User createUser(String name, String password, boolean isAdmin) {
+        password = hasher(password);
         return new User(name, password, isAdmin);
     }
 
@@ -42,11 +39,24 @@ public class UserManager{
             return false;
         }
         assert user != null;
-        if (user.getPassword().equals(password)) {
+        if (user.getPassword().equals(hasher(password))) {
             currentUser = user;
             return true;
         }
         return false;
+    }
+
+    private static String hasher(String toHash) { // hashes the values that the user inputs as their password
+        try {
+            final byte[] hash = MessageDigest.getInstance("SHA-256").digest(toHash.getBytes(StandardCharsets.UTF_8));
+            final StringBuilder new_str = new StringBuilder(hash.length);
+            for (byte hashVal : hash)
+                new_str.append(Integer.toHexString(255 & hashVal));
+            return new_str.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
 

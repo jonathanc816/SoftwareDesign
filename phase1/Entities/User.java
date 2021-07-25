@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
     private final boolean isAdmin;
     private static int globalPetId; // CamelCase convention
     private String username;
