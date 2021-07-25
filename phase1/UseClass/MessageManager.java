@@ -9,13 +9,14 @@ import java.util.HashMap;
  */
 public class MessageManager{
 
-    static private Integer messageID = 0;
+    static public Integer messageID = 0;
     static public HashMap<Integer, Message> messageDict = new HashMap<Integer, Message>();
 
     static public int createMessage(String fromName, String toName, String content) {
         Message message = new Message(fromName, toName, content);
+        int thisMessageID = messageID;
         addMessage(message);
-        return messageID;
+        return thisMessageID;
     }
 
     static public void addMessage(Message newMessage){
@@ -23,7 +24,9 @@ public class MessageManager{
         messageID += 1;
     }
 
-    static public Message getMessage(Integer messageID){return messageDict.get(messageID);}
+    static public Message getMessage(int messageID) {
+        return messageDict.get(messageID);
+    }
 
     static public ArrayList<Message> getMessages(ArrayList<Integer> messageIds) {
         ArrayList<Message> messages = new ArrayList<Message>();

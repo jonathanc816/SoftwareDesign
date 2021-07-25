@@ -39,11 +39,12 @@ public class UserController {
         if (UserManager.login(username, password)){
             boolean back = false;
             while (!back) {
-                Presenter.showInstruction("Welcome back! "+UserManager.currentUser.getUsername()+". choose your option");
+                Presenter.showInstruction("\nWelcome back! "+UserManager.currentUser.getUsername()+". choose your option");
                 Presenter.showMenu(new String[] {"Pet", "Mailbox", "Friends", "Logout"});
                 int userChoice = GameController.getUserNum(4);
                 if (userChoice == 1) {
                     System.out.println("TODO: see pet");
+                    MessageController.createMessage();
                 }
                 else if (userChoice == 2) {
                     MessageController.mailbox();
