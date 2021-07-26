@@ -1,7 +1,7 @@
-public class UserNameChecker implements ValidationChecker{
+public class UserNameChecker extends ManagerControl implements ValidationChecker{
     @Override
     public boolean check(String s) {
-        return !UserManager.isUserExist(s);
+        return !LocalUserManager.isUserExist(s);
     }
 
     @Override

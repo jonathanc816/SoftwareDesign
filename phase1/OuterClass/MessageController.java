@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MessageController {
+public class MessageController extends ManagerControl {
     static String friendRequest = "Can we make friends?";
 
     static public void mailbox() {
         boolean back = false;
         while (!back) {
-            User user = UserManager.currentUser;
+            User user = LocalUserManager.getCurrentUser();
 
-            ArrayList<Message> messages = MessageManager.getMessages(user.getInbox());
+            ArrayList<Message> messages = LocalMessageManager.getMessages(user.getInbox());
 
             if (messages.size() == 0) {
                 Presenter.showInstruction("Your mailbox is empty, enter any letter to go back");
@@ -43,8 +43,8 @@ public class MessageController {
             boolean UserInput = GameController.getUserYesOrNo(
                     "Enter 'y' to accept this friend request or 'n' to ignore");
             if (UserInput) {
-                User fromUser = UserManager.getUserByName(message.getFromID());
-                User toUser = UserManager.getUserByName(message.getToID());
+                User fromUser = LocalUserManager.getUserByName(message.getFromID());
+                User toUser = LocalUserManager.getUserByName(message.getToID());
                 fromUser.addFriendName(toUser.getUsername());
                 toUser.addFriendName(fromUser.getUsername());
                 GameController.getUserString("You are friends with "+message.getFromID()+
@@ -61,13 +61,13 @@ public class MessageController {
     }
 
     static public void createMessage() {
-        String fromId = UserManager.currentUser.getUsername();
+        String fromId = LocalUserManager.getCurrentUser().getUsername();
         String toId = GameController.getUserString("Please enter the username of the addressee...");
         String content = GameController.getUserString("Please enter the content of the message...");
-        int messageID = MessageManager.createMessage(fromId, toId, content);
+        int messageID = LocalMessageManager.createMessage(fromId, toId, content);
 
-        if (UserManager.isUserExist(toId)) {
-            Objects.requireNonNull(UserManager.getUserByName(toId)).addInboxId(messageID);
+        if (LocalUserManager.isUserExist(toId)) {
+            Objects.requireNonNull(LocalUserManager.getUserByName(toId)).addInboxId(messageID);
             Presenter.showInstruction("Your lovely pet has sent your message to "+toId+". Great!");
         }
         else {
@@ -76,7 +76,7 @@ public class MessageController {
     }
 
     static public void createFriendRequest(String fromId, String toId) {
-        int messageID = MessageManager.createMessage(fromId, toId, friendRequest);
-        Objects.requireNonNull(UserManager.getUserByName(toId)).addInboxId(messageID);
+        int messageID = LocalMessageManager.createMessage(fromId, toId, friendRequest);
+        Objects.requireNonNull(LocalUserManager.getUserByName(toId)).addInboxId(messageID);
     }
 }

@@ -1,4 +1,6 @@
-public class Message {
+import java.io.Serializable;
+
+public class Message implements Serializable {
     private final String fromID;
     private String toID;
     private String content;

@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * This the class of templates for different targets
  * i.e. Message
@@ -7,7 +9,7 @@
  * @since   2020-07-09
  */
 
-public class Template {
+public class Template implements Serializable {
     private final String name;
     private final String target;
     private final int paraNum;

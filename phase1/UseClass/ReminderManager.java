@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class ReminderManager {
+public class ReminderManager implements Serializable {
     /**
      * Stores reminders (list)
      * Get reminder based on id(s) (method (list))

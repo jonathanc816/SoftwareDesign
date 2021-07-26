@@ -6,35 +6,37 @@ import java.util.HashMap;
 import java.util.List;
 
 public class UserManager implements Serializable {
-    static HashMap<String, User> userList = new HashMap<>();
-    static User currentUser = null;
+    private final HashMap<String, User> userList = new HashMap<>();
+    private User currentUser = null;
 
-    public static boolean isUserExist(String name) {
-        return userList.containsKey(name);
+    public User getCurrentUser() { return currentUser; }
+
+    public boolean isUserExist(String name) {
+        return this.userList.containsKey(name);
     }
 
-    public static User getUserByName(String name) {
-        return userList.get(name);
+    public User getUserByName(String name) {
+        return this.userList.get(name);
     }
 
-    public static void addUser(User user) {
-        userList.put(user.getUsername(), user);
-        currentUser = user;
+    public void addUser(User user) {
+        this.userList.put(user.getUsername(), user);
+        this.currentUser = user;
     }
 
-    public static void addUsers(List<User> users) {
+    public void addUsers(List<User> users) {
         for (User x : users) {
-            userList.put(x.getUsername(), x);
+            this.userList.put(x.getUsername(), x);
         }
     }
 
-    public static User createUser(String name, String password, boolean isAdmin) {
-        password = hasher(password);
+    public User createUser(String name, String password, boolean isAdmin) {
+        password = this.hasher(password);
         return new User(name, password, isAdmin);
     }
 
-    public static boolean login(String username, String password) {
-        User user = getUserByName(username);
+    public boolean login(String username, String password) {
+        User user = this.getUserByName(username);
         if (!isUserExist(username)) {
             return false;
         }
@@ -46,7 +48,7 @@ public class UserManager implements Serializable {
         return false;
     }
 
-    private static String hasher(String toHash) { // hashes the values that the user inputs as their password
+    private String hasher(String toHash) { // hashes the values that the user inputs as their password
         try {
             final byte[] hash = MessageDigest.getInstance("SHA-256").digest(toHash.getBytes(StandardCharsets.UTF_8));
             final StringBuilder new_str = new StringBuilder(hash.length);

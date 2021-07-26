@@ -1,4 +1,6 @@
-public class Pet {
+import java.io.Serializable;
+
+public class Pet implements Serializable {
   private String petName;
   private final int id;
   private final String petColour;

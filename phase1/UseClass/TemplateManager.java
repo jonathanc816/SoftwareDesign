@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  * @version 1.0
  * @since   2020-07-19
  */
-public class TemplateManager {
+public class TemplateManager implements Serializable {
     private List<Template> templates = new ArrayList<>();
 
     /**

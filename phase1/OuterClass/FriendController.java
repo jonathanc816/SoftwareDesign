@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
-public class FriendController {
+public class FriendController extends ManagerControl {
+
     static public void friendMenu() {
         while(true) {
             Presenter.showMenu(new String[]{"See friends", "Add friend", "Back"}, "This is friend menu, you can:");
@@ -18,7 +19,7 @@ public class FriendController {
     }
 
     static public void seeFriends() {
-        ArrayList<String> friends = UserManager.currentUser.getFriendList();
+        ArrayList<String> friends = LocalUserManager.getCurrentUser().getFriendList();
         int friendNum = friends.size();
         friends.add("Back");
 
@@ -34,8 +35,8 @@ public class FriendController {
                     return;
                 }
                 else {
-                    User friend = UserManager.getUserByName(friends.get(userChoice-1));
-                    Pet friendPet = PetManager.findPet(friend.getPetId());
+                    User friend = LocalUserManager.getUserByName(friends.get(userChoice-1));
+                    Pet friendPet = LocalPetManager.findPet(friend.getPetId());
                     assert friendPet != null;
                     if (friendPet.getPublicity()) {
                         PetController.viewPet(friend.getPetId());
@@ -53,14 +54,14 @@ public class FriendController {
 
     static public void addFriends() {
         String friendName = GameController.getUserString("Please enter the name of user you want to add friend...");
-        if (UserManager.currentUser.getFriendList().contains(friendName)) {
+        if (LocalUserManager.getCurrentUser().getFriendList().contains(friendName)) {
             GameController.getUserString("You have already add "+friendName+", enter any key to go back");
         }
-        else if (friendName.equals(UserManager.currentUser.getUsername())) {
+        else if (friendName.equals(LocalUserManager.getCurrentUser().getUsername())) {
             GameController.getUserString("Can't add yourself, enter any key to go back");
         }
-        else if (UserManager.isUserExist(friendName)) {
-            MessageController.createFriendRequest(UserManager.currentUser.getUsername(), friendName);
+        else if (LocalUserManager.isUserExist(friendName)) {
+            MessageController.createFriendRequest(LocalUserManager.getCurrentUser().getUsername(), friendName);
             GameController.getUserString(friendName+" has received your friend request. " +
                     "\nwait for acceptance, enter any key to go back");
         }

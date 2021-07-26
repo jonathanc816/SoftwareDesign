@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  * @version 1.0
  * @since   2020-07-19
  */
-public class ActionCreator {
+public class ActionCreator implements Serializable {
 
     /**
      * Create and return a reminder object according to user input

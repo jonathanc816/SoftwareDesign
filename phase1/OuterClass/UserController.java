@@ -1,18 +1,18 @@
-public class UserController {
-    static public void creatNewUser() {
+public class UserController extends ManagerControl {
+    public static void creatNewUser() {
         String username =
                 GameController.getUserString(new UserNameChecker(), "Please enter new user name...");
         String password = GameController.getUserString("Please enter the password...");
         boolean isAdmin = GameController.getUserYesOrNo("Are you a admin user? (y/n)");
-        User newUser = UserManager.createUser(username, password, isAdmin);
-        UserManager.addUser(newUser);
+        User newUser = LocalUserManager.createUser(username, password, isAdmin);
+        LocalUserManager.addUser(newUser);
 
         Presenter.showInstruction("Welcome! " + username + ". Now choose your pet!");
         createUserPet();
     }
 
-    static public void createUserPet() {
-        User currentUser = UserManager.currentUser;
+    public static void createUserPet() {
+        User currentUser = LocalUserManager.getCurrentUser();
         String petName = GameController.getUserString("Please enter the name of your pet...");
 
         String[] colours = new String[] {"red", "yellow", "blue", "green"};
@@ -26,20 +26,20 @@ public class UserController {
 //        boolean petPublicity =
 //                GameController.getUserYesOrNo("Would you like to make your pet public to your friends? (y/n)");
 
-        Pet newPet = PetManager.createPet(
+        Pet newPet = LocalPetManager.createPet(
                 petName, currentUser.getPetId(), petColour, petSex, true, "No Status");
         Presenter.showInstruction(
                 "Congratulations! "+currentUser.getUsername()+". You now have a "+petColour+"," +
                         " "+petSex+" pet called "+petName+". Login to see more.");
     }
 
-    static public void userLogin() {
+    public static void userLogin() {
         String username = GameController.getUserString("Please enter your user name...");
         String password = GameController.getUserString("Please enter the password...");
-        if (UserManager.login(username, password)){
+        if (LocalUserManager.login(username, password)){
             boolean back = false;
             while (!back) {
-                Presenter.showInstruction("\nWelcome back! "+UserManager.currentUser.getUsername()+". choose your option");
+                Presenter.showInstruction("\nWelcome back! "+ LocalUserManager.getCurrentUser().getUsername()+". choose your option");
                 Presenter.showMenu(new String[] {"Pet", "Mailbox", "Friends", "Logout"});
                 int userChoice = GameController.getUserNum(4);
                 if (userChoice == 1) {
@@ -51,7 +51,7 @@ public class UserController {
                 else if (userChoice == 3){
                     FriendController.friendMenu();
                 }
-                else {back = true;}
+                else {StateManager.saveState(); back = true; }
             }
         }
         else {
