@@ -6,6 +6,12 @@ public class Main {
         if (f.exists() && !f.isDirectory()) {
             StateManager.restoreState();
         }
+        else {
+            f = new File("Files/");
+            if (!f.mkdirs()) {
+                System.out.println("Error, could not make file, check permissions.");
+            }
+        }
         GameController.starterMenu();
     }
 }

@@ -18,7 +18,7 @@ public class StateManager extends ManagerControl {
             i.printStackTrace();
         }
     }
-    public static boolean restoreState() {
+    public static void restoreState() {
         try {
             FileInputStream fileIn = new FileInputStream("Files/ObjectManager.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -30,12 +30,10 @@ public class StateManager extends ManagerControl {
             LocalActionCreator = (ActionCreator) in.readObject();
             in.close();
             fileIn.close();
-            return true;
 
         }
         catch (IOException | ClassNotFoundException i) {
             i.printStackTrace();
-            return false;
         }
     }
 
