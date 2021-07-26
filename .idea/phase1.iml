@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/phase1/Entities" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/phase1/UseClass" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/phase1/OuterClass" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/phase1/GatewayClass" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

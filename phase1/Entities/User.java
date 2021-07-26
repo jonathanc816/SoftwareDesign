@@ -5,10 +5,10 @@ import java.util.List;
 
 public class User implements Serializable {
     private final boolean isAdmin;
-    private static int globalPetId; // CamelCase convention
+//    private static int globalPetId; // CamelCase convention
     private String username;
     private String password; // Can input it as a hashed string and have a hashing function in the UserManager class
-    private final int userPetId;
+    private int userPetId;
     private int food;
     private final ArrayList<Integer> inbox; // setting these to final because we never will reassign them
     private final ArrayList<Integer> reminderList;
@@ -19,8 +19,8 @@ public class User implements Serializable {
         this.isAdmin = isAdmin;
         this.username = username;
         this.password = password;
-        this.userPetId = globalPetId;
-        globalPetId += 1;
+//        this.userPetId = globalPetId;
+//        globalPetId += 1;
         this.food = 0;
         this.inbox = new ArrayList<>();
         this.reminderList = new ArrayList<>();
@@ -34,6 +34,10 @@ public class User implements Serializable {
     public String getPassword() { return this.password; }
 
     public void setPassword(String new_pass) { this.password = new_pass; } // should only pass in hashed passwords
+
+    public void setUserPetId(int userPetId) {
+        this.userPetId = userPetId;
+    }
 
     public int getPetId(){ return userPetId; }
 

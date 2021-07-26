@@ -26,8 +26,8 @@ public class UserController extends ManagerControl {
 //        boolean petPublicity =
 //                GameController.getUserYesOrNo("Would you like to make your pet public to your friends? (y/n)");
 
-        Pet newPet = LocalPetManager.createPet(
-                petName, currentUser.getPetId(), petColour, petSex, true, "No Status");
+        int newPetId = LocalPetManager.createPet(petName, petColour, petSex, true, "No Status");
+        LocalUserManager.getCurrentUser().setUserPetId(newPetId);
         Presenter.showInstruction(
                 "Congratulations! "+currentUser.getUsername()+". You now have a "+petColour+"," +
                         " "+petSex+" pet called "+petName+". Login to see more.");
