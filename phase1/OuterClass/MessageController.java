@@ -17,7 +17,7 @@ public class MessageController extends ManagerControl {
                 back = true;
             }
             else {
-                ArrayList<String> fromIdList = new ArrayList<String>();
+                ArrayList<String> fromIdList = new ArrayList<>();
                 for (Message message : messages) {
                     fromIdList.add("A message from: "+message.getFromID());
                 }
@@ -62,6 +62,7 @@ public class MessageController extends ManagerControl {
 
     static public void createMessage() {
         String fromId = LocalUserManager.getCurrentUser().getUsername();
+        Presenter.showInstruction(LocalMessageManager.getTemplateInfo()+"\n");
         String toId = GameController.getUserString("Please enter the username of the addressee...");
         String content = GameController.getUserString("Please enter the content of the message...");
         int messageID = LocalMessageManager.createMessage(fromId, toId, content);

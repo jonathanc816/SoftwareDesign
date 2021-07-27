@@ -28,7 +28,7 @@ public class PetController extends ManagerControl{
         while (true) {
             boolean userInput = GameController.getUserYesOrNo("Enter 'y' to feed it or 'n' to go back");
             if (userInput) {
-                Presenter.showInstruction(pet.getPetName()+": Yummy Yummy! Thank you," + user.getUsername()+"\n");
+                Presenter.showInstruction(pet.getPetName()+": Yummy Yummy! Thank you, " + user.getUsername()+"\n");
             }
             else {
                 return;

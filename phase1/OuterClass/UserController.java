@@ -7,7 +7,8 @@ public class UserController extends ManagerControl {
         User newUser = LocalUserManager.createUser(username, password, isAdmin);
         LocalUserManager.addUser(newUser);
 
-        Presenter.showInstruction("Welcome! " + username + ". Now choose your pet!");
+        Presenter.showInstruction("Welcome! " + username + ".");
+        Presenter.showInstruction(LocalPetManager.getTemplateInfo());
         createUserPet();
     }
 
@@ -40,8 +41,8 @@ public class UserController extends ManagerControl {
             boolean back = false;
             while (!back) {
                 Presenter.showInstruction("\nWelcome back! "+ LocalUserManager.getCurrentUser().getUsername()+". choose your option");
-                Presenter.showMenu(new String[] {"Pet", "Mailbox", "Friends", "Logout"});
-                int userChoice = GameController.getUserNum(4);
+                Presenter.showMenu(new String[] {"Pet", "Mailbox", "Friends", "Admin Setting", "Logout"});
+                int userChoice = GameController.getUserNum(5);
                 if (userChoice == 1) {
                     PetController.petMenu();
                 }
@@ -50,6 +51,14 @@ public class UserController extends ManagerControl {
                 }
                 else if (userChoice == 3){
                     FriendController.friendMenu();
+                }
+                else if (userChoice == 4){
+                    if (LocalUserManager.getCurrentUser().hasAuthority()) {
+                        AdminController.adminMenu();
+                    }
+                    else {
+                        Presenter.showInstruction("Permission denied! You are not admin user.");
+                    }
                 }
                 else {StateManager.saveState(); back = true; }
             }
