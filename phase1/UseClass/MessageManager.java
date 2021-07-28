@@ -17,6 +17,13 @@ public class MessageManager extends TemplateInfo{
         this.setTemplateInfo("You are creating a message.");
     }
 
+    /**
+     * Provides a new message object.
+     * @param fromName String of sending user
+     * @param toName String of receiving user
+     * @param content Content of message
+     * @return A message object
+     */
     public int createMessage(String fromName, String toName, String content) {
         Message message = new Message(fromName, toName, content);
         int thisMessageID = messageID;
@@ -24,6 +31,10 @@ public class MessageManager extends TemplateInfo{
         return thisMessageID;
     }
 
+    /**
+     * Adds the given message to the MessageManager map.
+     * @param newMessage Adds message to MessageManager map.
+     */
     public void addMessage(Message newMessage){
         messageDict.put(messageID, newMessage);
         messageID += 1;
@@ -33,6 +44,11 @@ public class MessageManager extends TemplateInfo{
         return messageDict.get(messageID);
     }
 
+    /**
+     * Get all the messages in messageIds and return a list of them.
+     * @param messageIds ArrayList of messageIds
+     * @return Arraylist of messages
+     */
     public ArrayList<Message> getMessages(ArrayList<Integer> messageIds) {
         ArrayList<Message> messages = new ArrayList<>();
         for (int id : messageIds) {

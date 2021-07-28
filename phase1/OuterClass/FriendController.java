@@ -2,6 +2,9 @@ import java.util.ArrayList;
 
 public class FriendController extends ManagerControl {
 
+    /**
+     * Shows menu for friends and does some action based on the result of the users input.
+     */
     static public void friendMenu() {
         while(true) {
             if (LocalUserManager.isCurrentUserGuest()) {
@@ -23,6 +26,9 @@ public class FriendController extends ManagerControl {
         }
     }
 
+    /**
+     * Show a list of the current users friends and interact with those friends.
+     */
     static public void seeFriends() {
         ArrayList<String> friends = new ArrayList<>(LocalUserManager.getCurrentUser().getFriendList());
         int friendNum = friends.size();
@@ -56,6 +62,9 @@ public class FriendController extends ManagerControl {
         }
     }
 
+    /**
+     * Add a friend from a users input and verify that input.
+     */
     static public void addFriends() {
         String friendName = GameController.getUserString("Please enter the name of user you want to add friend...");
         if (LocalUserManager.getCurrentUser().getFriendList().contains(friendName)) {

@@ -1,5 +1,9 @@
 public class UserController extends ManagerControl {
 
+    /**
+     * Create a new user based on the users input, types include AdminUser, GuestUser, User
+     * @param guest value of guest user setting
+     */
     public static void createNewUser(boolean guest) {
         User newUser = null;
         if (!guest) {
@@ -45,6 +49,11 @@ public class UserController extends ManagerControl {
                         " "+petSex+" pet named "+petName+". Login to see more.");
     }
 
+    /**
+     * Go through authentication provess for the user, unless the user account was just created. Displays basic menu
+     * window
+     * @param justCreated Boolean value that skips login process if user account was just created
+     */
     public static void userLogin(boolean justCreated) {
         String username = null;
         String password = null;

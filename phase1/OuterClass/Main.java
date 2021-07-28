@@ -1,6 +1,9 @@
 import java.io.File;
 
 public class Main {
+    /**
+     * Initialize session, create files.
+     */
     public static void main (String[] args) {
         File f = new File("Files/ObjectManager.ser");
         if (f.exists() && !f.isDirectory()) {

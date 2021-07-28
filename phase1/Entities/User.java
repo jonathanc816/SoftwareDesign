@@ -14,11 +14,13 @@ public class User implements Serializable {
     private final ArrayList<String> friendList; //usernames of friends
 
 
+    /**
+     * @param username username for user
+     * @param password password for user
+     */
     public User(String username, String password){
         this.username = username;
         this.password = password;
-//        this.userPetId = globalPetId;
-//        globalPetId += 1;
         this.food = 0;
         this.inbox = new ArrayList<>();
         this.reminderList = new ArrayList<>();

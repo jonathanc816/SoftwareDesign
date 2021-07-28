@@ -10,6 +10,15 @@ public class Pet implements Serializable {
   private int growthLevel;
   private String status;
 
+  /**
+   * Constructor for pet
+   * @param petName Name of the pet
+   * @param id ID of the pet
+   * @param petColour color of the pet
+   * @param petSex sex of the pet
+   * @param publicity public/private
+   * @param status current status of the pet
+   */
   public Pet(
       String petName, int id, String petColour, String petSex, boolean publicity, String status) {
     this.petName = petName;
