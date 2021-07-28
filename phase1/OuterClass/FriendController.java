@@ -4,6 +4,11 @@ public class FriendController extends ManagerControl {
 
     static public void friendMenu() {
         while(true) {
+            if (LocalUserManager.isCurrentUserGuest()) {
+                Presenter.showMenu(new String[] {}, "Guest users can't add friends. Press enter to return.");
+                String userChoice = GameController.getUserString();
+                return;
+            }
             Presenter.showMenu(new String[]{"See friends", "Add friend", "Back"}, "This is friend menu, you can:");
             int userChoice = GameController.getUserNum(3);
                 if (userChoice == 1) {

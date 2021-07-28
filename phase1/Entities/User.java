@@ -4,7 +4,6 @@ import java.util.Hashtable;
 import java.util.List;
 
 public class User implements Serializable {
-    private final boolean isAdmin;
 //    private static int globalPetId; // CamelCase convention
     private String username;
     private String password; // Can input it as a hashed string and have a hashing function in the UserManager class
@@ -15,8 +14,7 @@ public class User implements Serializable {
     private final ArrayList<String> friendList; //usernames of friends
 
 
-    public User(String username, String password, Boolean isAdmin){
-        this.isAdmin = isAdmin;
+    public User(String username, String password){
         this.username = username;
         this.password = password;
 //        this.userPetId = globalPetId;
@@ -57,7 +55,4 @@ public class User implements Serializable {
 
     public void addFriendName(String username) {friendList.add(username);}
 
-    public boolean hasAuthority() {
-        return isAdmin;
-    }
 }

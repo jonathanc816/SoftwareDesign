@@ -3,7 +3,7 @@ import java.io.*;
 public class StateManagerTest {
     public static void main(String [] args) {
         UserManager save_test = new UserManager();
-        save_test.addUser(save_test.createUser("bobby", "Pokemon", false));
+        save_test.addUser(save_test.createUser("bobby", "Pokemon"));
         try {
             FileOutputStream fileOut = new FileOutputStream("Files/UserManager.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);

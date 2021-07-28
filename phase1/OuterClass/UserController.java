@@ -1,13 +1,24 @@
 public class UserController extends ManagerControl {
-    public static void createNewUser() {
-        String username =
-                GameController.getUserString(new UserNameChecker(), "Please enter a new username...");
-        String password = GameController.getUserString("Please enter a password...");
-        boolean isAdmin = GameController.getUserYesOrNo("Are you an admin user? (y/n)");
-        User newUser = LocalUserManager.createUser(username, password, isAdmin);
-        LocalUserManager.addUser(newUser);
 
-        Presenter.showInstruction("Welcome, " + username + "!");
+    public static void createNewUser(boolean guest) {
+        User newUser = null;
+        if (!guest) {
+            String username =
+                    GameController.getUserString(new UserNameChecker(), "Please enter a new username...");
+            String password = GameController.getUserString("Please enter a password...");
+            boolean isAdmin = GameController.getUserYesOrNo("Are you an admin user? (y/n)");
+            if (isAdmin) {
+                newUser = LocalUserManager.createAdminUser(username, password);
+            }
+            else {
+                newUser = LocalUserManager.createUser(username, password);
+            }
+        }
+        else {
+            newUser = LocalUserManager.createGuestUser();
+        }
+        LocalUserManager.addUser(newUser);
+        Presenter.showInstruction("Welcome, " + LocalUserManager.getCurrentUser().getUsername() + "!");
         Presenter.showInstruction(LocalPetManager.getTemplateInfo());
         createUserPet();
     }
@@ -34,10 +45,14 @@ public class UserController extends ManagerControl {
                         " "+petSex+" pet named "+petName+". Login to see more.");
     }
 
-    public static void userLogin() {
-        String username = GameController.getUserString("Please enter your username...");
-        String password = GameController.getUserString("Please enter the password...");
-        if (LocalUserManager.login(username, password)){
+    public static void userLogin(boolean justCreated) {
+        String username = null;
+        String password = null;
+        if (!justCreated) {
+            username = GameController.getUserString("Please enter your username...");
+            password = GameController.getUserString("Please enter the password...");
+        }
+        if (justCreated || LocalUserManager.login(username, password)){
             boolean back = false;
             while (!back) {
                 Presenter.showInstruction("\nWelcome back, "+ LocalUserManager.getCurrentUser().getUsername()+"! What would you like to do?");
@@ -53,14 +68,21 @@ public class UserController extends ManagerControl {
                     FriendController.friendMenu();
                 }
                 else if (userChoice == 4){
-                    if (LocalUserManager.getCurrentUser().hasAuthority()) {
+                    if (LocalUserManager.isCurrentUserAdmin()) {
                         AdminController.adminMenu();
                     }
                     else {
                         Presenter.showInstruction("Permission denied! You are not an admin user.");
                     }
                 }
-                else {StateManager.saveState(); back = true; }
+                else {
+                    if (LocalUserManager.isCurrentUserGuest()) {
+                        LocalUserManager.deleteUser("guest");
+                    }
+                    LocalUserManager.setCurrentUser(null);
+                    StateManager.saveState();
+                    back = true;
+                }
             }
         }
         else {

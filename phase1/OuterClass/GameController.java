@@ -71,14 +71,24 @@ public class GameController {
     }
 
     static public void starterMenu() {
+        boolean justCreated = false;
         while (true) {
-            Presenter.showMenu(new String[]{"Login", "Create a new user"}, "\nWelcome to Tamagochi, enter a number to");
-            int input = getUserNum(2);
+            if (justCreated) {
+                UserController.userLogin(true);
+                justCreated = false;
+            }
+            Presenter.showMenu(new String[]{"Login", "Create a new user", "Create a new guest user."}, "\nWelcome to Tamagochi, enter a number to");
+            int input = getUserNum(3);
             if (input == 1) {
-                UserController.userLogin();
+                UserController.userLogin(false);
             }
             if (input == 2) {
-                UserController.createNewUser();
+                UserController.createNewUser(false);
+                justCreated = true;
+            }
+            if (input == 3) {
+                UserController.createNewUser(true);
+                justCreated = true;
             }
         }
     }

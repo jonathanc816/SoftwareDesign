@@ -1,7 +1,6 @@
-//public class GuestUser extends User {
-//
-//    public GuestUser (){
-//        super("guest", "guest"); // figure out how to fix the "must be hashed" issue
-//    }
-//
-//}
+public class GuestUser extends User {
+
+    public GuestUser(String username, String password) {
+        super(username, password);
+    }
+}

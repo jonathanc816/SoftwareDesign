@@ -8,7 +8,7 @@ public class Main {
         }
         else {
             f = new File("Files/");
-            if (!f.mkdirs()) {
+            if (!f.exists() && !f.mkdirs()) {
                 System.out.println("Error, could not make file, check permissions.");
             }
         }

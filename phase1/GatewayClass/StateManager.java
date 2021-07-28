@@ -30,7 +30,6 @@ public class StateManager extends ManagerControl {
             LocalActionCreator = (ActionCreator) in.readObject();
             in.close();
             fileIn.close();
-
         }
         catch (IOException | ClassNotFoundException i) {
             i.printStackTrace();
