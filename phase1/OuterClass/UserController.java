@@ -42,7 +42,7 @@ public class UserController extends ManagerControl {
         LocalUserManager.getCurrentUser().setUserPetId(newPetId);
         Presenter.showInstruction(
                 "Congratulations, "+currentUser.getUsername()+"! You now have a "+petColour+"," +
-                        " "+petSex+" pet named "+petName+". Login to see more.");
+                        " "+petSex+" pet named "+petName+".");
     }
 
     public static void userLogin(boolean justCreated) {
@@ -55,7 +55,7 @@ public class UserController extends ManagerControl {
         if (justCreated || LocalUserManager.login(username, password)){
             boolean back = false;
             while (!back) {
-                Presenter.showInstruction("\nWelcome back, "+ LocalUserManager.getCurrentUser().getUsername()+"! What would you like to do?");
+                Presenter.showInstruction("\nWelcome, "+ LocalUserManager.getCurrentUser().getUsername()+"! What would you like to do?");
                 Presenter.showMenu(new String[] {"Pet", "Mailbox", "Friends", "Admin Setting", "Logout"});
                 int userChoice = GameController.getUserNum(5);
                 if (userChoice == 1) {
