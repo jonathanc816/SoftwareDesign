@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class MessageController extends ManagerControl {
-    static String friendRequest = "Can we make friends?";
+    static String friendRequest = "Do you want to be friends?";
 
     static public void mailbox() {
         boolean back = false;

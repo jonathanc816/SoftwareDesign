@@ -30,7 +30,7 @@ public class PetManager extends TemplateInfo{
   }
 
   public PetManager(){
-    this.setTemplateInfo("Now create you pet!");
+    this.setTemplateInfo("Now create your pet!");
   }
 
   /**

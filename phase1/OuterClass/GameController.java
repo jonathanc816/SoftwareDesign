@@ -22,7 +22,7 @@ public class GameController {
                 System.out.println();
                 return Integer.parseInt(userChoice);
             }
-            System.out.println("Invalid number, please enter again");
+            System.out.println("Invalid number, please try again");
         }
 
     }
@@ -72,13 +72,13 @@ public class GameController {
 
     static public void starterMenu() {
         while (true) {
-            Presenter.showMenu(new String[]{"Login", "Create a new user"}, "\nWelcome to Tamagochi, enter number to");
+            Presenter.showMenu(new String[]{"Login", "Create a new user"}, "\nWelcome to Tamagochi, enter a number to");
             int input = getUserNum(2);
             if (input == 1) {
                 UserController.userLogin();
             }
             if (input == 2) {
-                UserController.creatNewUser();
+                UserController.createNewUser();
             }
         }
     }

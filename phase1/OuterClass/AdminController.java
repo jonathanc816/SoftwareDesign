@@ -2,8 +2,8 @@ public class AdminController extends ManagerControl{
     public static void adminMenu() {
             Presenter.showInstruction("Hi! admin user, "+LocalUserManager.getCurrentUser().getUsername());
         while(true) {
-            Presenter.showMenu(new String[]{"Edit pet template info", "Edit message template info", "Back"},
-                    "\nThis is admin setting, you can do these:");
+            Presenter.showMenu(new String[]{"Edit pet template info", "Edit message template info", "Go back"},
+                    "\nThis is the admin settings menu, you can:");
             int userChoice = GameController.getUserNum(3);
             if (userChoice == 1){
                 Presenter.showInstruction("The current pet template information is:");
@@ -11,7 +11,7 @@ public class AdminController extends ManagerControl{
                 Presenter.showInstruction("This information will be shown when people create a new pet");
                 String newPetIntro = GameController.getUserString("Now enter a new one...");
                 LocalPetManager.setTemplateInfo(newPetIntro);
-                Presenter.showInstruction("You have changed pet template information to ["+
+                Presenter.showInstruction("You have changed the pet template information to ["+
                         LocalPetManager.getTemplateInfo()+"] successfully!");
             }
             else if (userChoice == 2){

@@ -24,7 +24,7 @@ public class FriendController extends ManagerControl {
         friends.add("Back");
         while (true) {
             if (friendNum == 0) {
-                GameController.getUserString("You have no friend now, press any key to go back.");
+                GameController.getUserString("Your friends list is empty, press any key to go back.");
                 return;
             }
             else {
@@ -54,10 +54,10 @@ public class FriendController extends ManagerControl {
     static public void addFriends() {
         String friendName = GameController.getUserString("Please enter the name of user you want to add friend...");
         if (LocalUserManager.getCurrentUser().getFriendList().contains(friendName)) {
-            GameController.getUserString("You have already add "+friendName+", enter any key to go back");
+            GameController.getUserString("You have already added "+friendName+"! enter any key to go back");
         }
         else if (friendName.equals(LocalUserManager.getCurrentUser().getUsername())) {
-            GameController.getUserString("Can't add yourself, enter any key to go back");
+            GameController.getUserString("You can't add yourself! enter any key to go back");
         }
         else if (LocalUserManager.isUserExist(friendName)) {
             MessageController.createFriendRequest(LocalUserManager.getCurrentUser().getUsername(), friendName);
@@ -65,7 +65,7 @@ public class FriendController extends ManagerControl {
                     "\nwait for acceptance, enter any key to go back");
         }
         else {
-            GameController.getUserString("User not exist, enter any key to go back");
+            GameController.getUserString("This user does not exist, enter any key to go back");
         }
     }
 }
