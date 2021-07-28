@@ -19,10 +19,9 @@ public class FriendController extends ManagerControl {
     }
 
     static public void seeFriends() {
-        ArrayList<String> friends = LocalUserManager.getCurrentUser().getFriendList();
+        ArrayList<String> friends = new ArrayList<>(LocalUserManager.getCurrentUser().getFriendList());
         int friendNum = friends.size();
         friends.add("Back");
-
         while (true) {
             if (friendNum == 0) {
                 GameController.getUserString("You have no friend now, press any key to go back.");

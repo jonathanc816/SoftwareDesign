@@ -7,7 +7,9 @@ import java.util.ArrayList;
  *
  * @author Zhi Heng(Justin) Zheng
  */
-public class PetManager implements Serializable {
+public class PetManager extends TemplateInfo{
+
+  public Integer petID = 0;
 
   private List<Pet> petList = new ArrayList<>();
 
@@ -27,6 +29,10 @@ public class PetManager implements Serializable {
     petList.add(newPet);
   }
 
+  public PetManager(){
+    this.setTemplateInfo("Now create you pet!");
+  }
+
   /**
    * This method searches petList for a Pet object with petID and returns the object If it fails to
    * find such Pet object, it will return null
@@ -44,11 +50,16 @@ public class PetManager implements Serializable {
   }
 
   /** This method creates a new Pet object, adds it to petList, and returns it */
-  public Pet createPet(
-      String petName, int id, String petColour, String petSex, boolean publicity, String status) {
-    Pet newPet = new Pet(petName, id, petColour, petSex, publicity, status);
+  public int createPet(
+      String petName, String petColour, String petSex, boolean publicity, String status) {
+
+    int createPetId = petID;
+    Pet newPet = new Pet(petName, petID, petColour, petSex, publicity, status);
     addPet(newPet);
-    return newPet;
+
+    petID += 1;
+
+    return createPetId;
   }
 
   public String checkPublicity(int petID) {
@@ -100,4 +111,12 @@ public class PetManager implements Serializable {
     }
     return "This pet cannot be found.";
   }
+//
+//  public String getPetTemplateInfo() {
+//    return petTemplateInfo;
+//  }
+//
+//  public void setPetTemplateInfo(String newInfo) {
+//    this.petTemplateInfo = newInfo;
+//  }
 }
