@@ -12,7 +12,7 @@ public class FriendController extends ManagerControl {
                 String userChoice = GameController.getUserString();
                 return;
             }
-            Presenter.showMenu(new String[]{"See friends", "Add friend", "Back"}, "This is friend menu, you can:");
+            Presenter.showMenu(new String[]{"Friend list", "Add friend", "Back"}, "This is your friend menu, you can:");
             int userChoice = GameController.getUserNum(3);
                 if (userChoice == 1) {
                     seeFriends();
@@ -39,7 +39,7 @@ public class FriendController extends ManagerControl {
                 return;
             }
             else {
-                Presenter.showMenu(friends, "You have "+friendNum+" friends, enter number to see more.");
+                Presenter.showMenu(friends, "You have "+friendNum+" friend[s], enter a number to see more.");
                 int userChoice = GameController.getUserNum(friendNum + 1);
                 if (userChoice == friendNum + 1) {
                     return;
@@ -52,7 +52,7 @@ public class FriendController extends ManagerControl {
                         PetController.viewPet(friend.getPetId());
                     }
                     else {
-                        Presenter.showInstruction("Oh no. Your friend has made its pet private." +
+                        Presenter.showInstruction("Oh no. Your friend has made their pet private." +
                                 "\nPress any key to go back");
                         GameController.getUserString();
                         return;
