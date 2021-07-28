@@ -1,4 +1,7 @@
 public class AdminController extends ManagerControl{
+    /**
+     * Shows admin options and allows interaction with different templates.
+     */
     public static void adminMenu() {
             Presenter.showInstruction("Hi! admin user, "+LocalUserManager.getCurrentUser().getUsername());
         while(true) {

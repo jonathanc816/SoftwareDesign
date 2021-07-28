@@ -1,4 +1,7 @@
 public class PetController extends ManagerControl{
+    /**
+     * Shows the menu for interaction with pets, and allows for interaction with pets.
+     */
     static public void petMenu() {
         while (true) {
             Presenter.showMenu(new String[] {"See Pet", "Send message", "Edit Pet", "Back"},
@@ -19,6 +22,10 @@ public class PetController extends ManagerControl{
         }
     }
 
+    /**
+     * View a pets information and perform some actions with the pet.
+     * @param petId The ID of the pet to view.
+     */
     static public void viewPet(int petId) {
         User user = LocalUserManager.getCurrentUser();
         Pet pet = LocalPetManager.findPet(petId);
@@ -36,6 +43,9 @@ public class PetController extends ManagerControl{
         }
     }
 
+    /**
+     * Make basic changes to a pets variables.
+     */
     static public void editPet() {
         User user = LocalUserManager.getCurrentUser();
         Pet pet = LocalPetManager.findPet(user.getPetId());

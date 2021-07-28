@@ -1,7 +1,12 @@
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class GameController {
+    /**
+     * This function takes in a users input and returns it as a string.
+     * @return Users inputted string
+     */
     static public String getUserString() {
         Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
@@ -9,16 +14,22 @@ public class GameController {
         return userInput;
     }
 
+    /**
+     * Queries the user for a choice of number between 1-maxNum of options. Validates user input to be inbetween
+     * that range.
+     * @param maxNum The highest number a user can input
+     * @return The number the user chose
+     */
     static public int getUserNum(int maxNum) {
-        ArrayList<String> choices = new ArrayList<>();
+        HashMap<String, Integer> choices = new HashMap<>();
         for (int i=1; i<maxNum+1; i++) {
-            choices.add(Integer.toString(i));
+            choices.put(Integer.toString(i), 0);
         }
         Scanner sc = new Scanner(System.in);
 
         while (true) {
             String userChoice = sc.nextLine();
-            if (choices.contains(userChoice)) {
+            if (choices.containsKey(userChoice)) {
                 System.out.println();
                 return Integer.parseInt(userChoice);
             }
@@ -27,15 +38,22 @@ public class GameController {
 
     }
 
-    static public int getUserNum() {
-        return getUserNum(999);
-    }
-
+    /**
+     * Get a users string (calling getUserString) while displaying the instructions.
+     * @param instruction The instructions to display
+     * @return Choice of user
+     */
     static public String getUserString(String instruction) {
         System.out.println(instruction);
         return getUserString();
     }
 
+    /**
+     * Verifies a users string with the criteria defined in the class p. Gives a warning defined in
+     * class p when the input is invalid.
+     * @param p Some subclass of ValidationChecker
+     * @return Validated userInput string.
+     */
     static public String getUserString(ValidationChecker p) {
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -48,11 +66,22 @@ public class GameController {
         }
     }
 
+    /**
+     * Verifies a users string with the criteria defined in the class p. Gives a warning defined in
+     * class p when invalid. Also outputs the instruction before getting user input.
+     * @param p Some subclass of ValidationChecker
+     * @param instruction Some string of instructions
+     * @return Validated string
+     */
     static public String getUserString(ValidationChecker p, String instruction) {
         System.out.println(instruction);
         return getUserString(p);
     }
 
+    /**
+     * Gets a simple y/n response from the user.
+     * @return Boolean value from y/n input
+     */
     static public boolean getUserYesOrNo() {
         Scanner sc = new Scanner(System.in);
         while (true) {
@@ -65,11 +94,19 @@ public class GameController {
         }
     }
 
+    /**
+     * Gets simple y/n input from the user and displays instruction before that.
+     * @param instruction Some instruction to display to the user
+     * @return boolean value from y/n input
+     */
     static public boolean getUserYesOrNo(String instruction) {
         System.out.println(instruction);
         return getUserYesOrNo();
     }
 
+    /**
+     * Creates a session for presentation to the user and allows login/creation of users
+     */
     static public void starterMenu() {
         boolean justCreated = false;
         while (true) {

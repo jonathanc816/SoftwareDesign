@@ -62,6 +62,11 @@ public class PetManager extends TemplateInfo{
     return createPetId;
   }
 
+  /**
+   * Given a petID, return a public/private or a missing warning.
+   * @param petID The id of the pet to check publicity of
+   * @return a string representing public or private
+   */
   public String checkPublicity(int petID) {
     Pet petToCheck = findPet(petID);
     if (petToCheck != null) {
@@ -89,6 +94,11 @@ public class PetManager extends TemplateInfo{
     }
   }
 
+  /**
+   * Change the name of the pet defined by petID to the newPetName
+   * @param petID A petID
+   * @param newPetName The new name the pet should have.
+   */
   public void changePetName(int petID, String newPetName){
     Pet petToName = findPet(petID);
     if (petToName != null){
@@ -98,6 +108,11 @@ public class PetManager extends TemplateInfo{
     }
   }
 
+  /**
+   * Return the status of the pet.
+   * @param petID The id of the pet
+   * @return The status of the pet
+   */
   public String updatePetStatus(int petID){
     Pet petToUpdate = findPet(petID);
     if (petToUpdate != null){

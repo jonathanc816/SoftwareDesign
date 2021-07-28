@@ -4,6 +4,9 @@ import java.util.Objects;
 public class MessageController extends ManagerControl {
     static String friendRequest = "Do you want to be friends?";
 
+    /**
+     * Shows a users mailbox and allows them to interact with the mail.
+     */
     static public void mailbox() {
         boolean back = false;
         while (!back) {
@@ -36,6 +39,10 @@ public class MessageController extends ManagerControl {
         }
     }
 
+    /**
+     * Shows the user a specific message in detail, and allows for response fields/friend request responses.
+     * @param message the message to show
+     */
     static public void seeMessage(Message message) {
         Presenter.showInstruction(
                 "From: "+message.getFromID()+"  To: "+message.getToID()+"\nContent: "+message.getContent()+"\n");
@@ -60,6 +67,9 @@ public class MessageController extends ManagerControl {
         }
     }
 
+    /**
+     * Create a message to another user based on user inputs.
+     */
     static public void createMessage() {
         String fromId = LocalUserManager.getCurrentUser().getUsername();
         Presenter.showInstruction(LocalMessageManager.getTemplateInfo()+"\n");
@@ -76,6 +86,11 @@ public class MessageController extends ManagerControl {
         }
     }
 
+    /**
+     * Create a friend request to send to another user.
+     * @param fromId ID of the user to send from
+     * @param toId ID of the user to send to
+     */
     static public void createFriendRequest(String fromId, String toId) {
         int messageID = LocalMessageManager.createMessage(fromId, toId, friendRequest);
         Objects.requireNonNull(LocalUserManager.getUserByName(toId)).addInboxId(messageID);

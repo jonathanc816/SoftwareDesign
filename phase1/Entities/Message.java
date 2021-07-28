@@ -5,6 +5,12 @@ public class Message implements Serializable {
     private String toID;
     private String content;
 
+    /**
+     * Constructor for Message
+     * @param fromID Who the message is from
+     * @param toID Who the message is to
+     * @param content Content of the message
+     */
     public Message(String fromID, String toID, String content) {
         this.fromID = fromID;
         this.toID = toID;
