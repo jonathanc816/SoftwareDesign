@@ -39,7 +39,7 @@ public class FriendController extends ManagerControl {
                 return;
             }
             else {
-                Presenter.showMenu(friends, "You have "+friendNum+" friend[s], enter a number to see more.");
+                Presenter.showMenu(friends, "You have "+friendNum+" friend[s], enter a number to see visit them.");
                 int userChoice = GameController.getUserNum(friendNum + 1);
                 if (userChoice == friendNum + 1) {
                     return;
