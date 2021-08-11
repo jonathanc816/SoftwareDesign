@@ -1,7 +1,9 @@
+package manager;
+
+import entity.Reminder;
+
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 public class ReminderManager implements Serializable {
     /**

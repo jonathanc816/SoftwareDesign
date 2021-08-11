@@ -1,4 +1,7 @@
-import java.io.Serializable;
+package manager;
+
+import entity.Pet;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -7,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author Zhi Heng(Justin) Zheng
  */
-public class PetManager extends TemplateInfo{
+public class PetManager extends TemplateInfo {
 
   public Integer petID = 0;
 

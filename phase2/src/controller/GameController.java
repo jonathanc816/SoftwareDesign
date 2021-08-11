@@ -1,6 +1,10 @@
+package controller;
+
+import controller.inputChecker.ValidationChecker;
+import presenter.Presenter;
+
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class GameController {
     /**

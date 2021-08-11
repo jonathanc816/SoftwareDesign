@@ -1,3 +1,9 @@
+package manager;
+
+import entity.AdminUser;
+import entity.GuestUser;
+import entity.User;
+
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

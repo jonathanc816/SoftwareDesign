@@ -1,3 +1,10 @@
+package controller;
+
+import controller.inputChecker.UserNameChecker;
+import entity.User;
+import gateway.StateManager;
+import presenter.Presenter;
+
 public class UserController extends ManagerControl {
 
     /**

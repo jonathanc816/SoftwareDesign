@@ -1,7 +1,7 @@
 This is a Tamagochi text base game.
 
 0) Program Instructions
-    - To play the game, run Main.main() method.
+    - To play the game, run controller.Main.main() method.
     - TO AVOID LOSING DATA, PLEASE NOT TERMINATE PROGRAM OUTSIDE THE GAME. (Important!)
     - To exit the game, choose 'Exit' option in menu.
     - To clean all game data to reset the game, delete Files/ObjectManager.ser in the project file.
@@ -31,7 +31,7 @@ This is a Tamagochi text base game.
 
 
 3) Mailbox
-    - User can view messages delivered by other user's lovely pet in Mailbox.
+    - entity.User can view messages delivered by other user's lovely pet in Mailbox.
 
 
 4) Friends
@@ -41,10 +41,10 @@ This is a Tamagochi text base game.
     - If 'ignore', nothing happened. Friend request will be saved in user's mailbox that can be accept later.
 
 
-5) Pet
+5) entity.Pet
     - Users can edit their own pet (change name/color/public or private)
-    - Pet can send messages to other existed users no matter you are friends or not
-    - Pet is default public to friends.
+    - entity.Pet can send messages to other existed users no matter you are friends or not
+    - entity.Pet is default public to friends.
     - You can visit and interact with your friend's pet iff it's public.
 
 

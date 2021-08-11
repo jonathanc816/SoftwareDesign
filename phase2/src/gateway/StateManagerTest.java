@@ -1,3 +1,7 @@
+package gateway;
+
+import manager.UserManager;
+
 import java.io.*;
 
 public class StateManagerTest {

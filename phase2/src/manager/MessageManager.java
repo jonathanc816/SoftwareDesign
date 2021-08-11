@@ -1,4 +1,7 @@
-import java.io.Serializable;
+package manager;
+
+import entity.Message;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -8,7 +11,7 @@ import java.util.HashMap;
  *    Send messages between users (add message to users mailbox)
  *    Add to messages (entity.Message)
  */
-public class MessageManager extends TemplateInfo{
+public class MessageManager extends TemplateInfo {
 
     public Integer messageID = 0;
     public HashMap<Integer, Message> messageDict = new HashMap<>();
