@@ -10,7 +10,7 @@ public class PetController extends ManagerControl{
      */
     static public void petMenu() {
         while (true) {
-            Presenter.showMenu(new String[] {"See entity.Pet", "Send message", "Edit entity.Pet", "Back"},
+            Presenter.showMenu(new String[] {"See Pet", "Send message", "Edit Pet", "Back"},
                     "You can do these with your pet:");
             int userChoice = GameController.getUserNum(4);
             if (userChoice == 1) {
@@ -37,7 +37,8 @@ public class PetController extends ManagerControl{
         Pet pet = LocalPetManager.findPet(petId);
         assert pet != null;
         Presenter.showInstruction("You see a "+pet.getPetColour()+", "+
-                pet.getPetSex()+" pet named "+pet.getPetName()+" saying hi to you!\n");
+                pet.getPetSex()+" pet named "+pet.getPetName()+"\n");
+        Presenter.showInstruction(pet.getPetName()+": "+pet.getGreeting()+".\n");
         while (true) {
             boolean userInput = GameController.getUserYesOrNo("Enter 'y' to feed it or 'n' to go back");
             if (userInput) {

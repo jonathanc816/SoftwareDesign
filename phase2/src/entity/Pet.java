@@ -11,6 +11,7 @@ public class Pet implements Serializable {
   private int hungerLevel;
   private int growthLevel;
   private String status;
+  private String greeting;
 
   /**
    * Constructor for pet
@@ -22,7 +23,7 @@ public class Pet implements Serializable {
    * @param status current status of the pet
    */
   public Pet(
-      String petName, int id, String petColour, String petSex, boolean publicity, String status) {
+      String petName, int id, String petColour, String petSex, boolean publicity, String status, String greeting) {
     this.petName = petName;
     this.petColour = petColour;
     this.petSex = petSex;
@@ -31,6 +32,7 @@ public class Pet implements Serializable {
     this.growthLevel = 0;
     this.id = id;
     this.status = status;
+    this.greeting = greeting;
   }
 
   public String getPetName() {
@@ -87,5 +89,13 @@ public class Pet implements Serializable {
 
   public void setStatus(String newStatus) {
     this.status = newStatus;
+  }
+
+  public String getGreeting(){
+    return this.greeting;
+  }
+
+  public void setGreeting(String greeting) {
+    this.greeting = greeting;
   }
 }

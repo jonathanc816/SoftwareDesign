@@ -46,10 +46,10 @@ public class UserController extends ManagerControl {
         Presenter.showMenu(sex, "Select your pet's sex (enter number to select)");
         String petSex = sex[GameController.getUserNum(2) - 1];
 
-//        boolean petPublicity =
-//                controller.GameController.getUserYesOrNo("Would you like to make your pet public to your friends? (y/n)");
+        String greeting = GameController.getUserString("Please enter the greeting your pet would say...");
 
-        int newPetId = LocalPetManager.createPet(petName, petColour, petSex, true, "No Status");
+        int newPetId = LocalPetManager.createPet(
+                petName, petColour, petSex, true, "No Status", greeting);
         LocalUserManager.getCurrentUser().setUserPetId(newPetId);
         Presenter.showInstruction(
                 "Congratulations, "+currentUser.getUsername()+"! You now have a "+petColour+"," +
@@ -72,7 +72,7 @@ public class UserController extends ManagerControl {
             boolean back = false;
             while (!back) {
                 Presenter.showInstruction("\nWelcome, "+ LocalUserManager.getCurrentUser().getUsername()+"! What would you like to do?");
-                Presenter.showMenu(new String[] {"entity.Pet", "Mailbox", "Friends", "Admin Setting", "Logout"});
+                Presenter.showMenu(new String[] {"Pet", "Mailbox", "Friends", "Admin Setting", "Logout"});
                 int userChoice = GameController.getUserNum(5);
                 if (userChoice == 1) {
                     PetController.petMenu();

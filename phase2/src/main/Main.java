@@ -1,6 +1,8 @@
-package controller;
+package main;
 
 import java.io.File;
+
+import controller.GameController;
 import gateway.StateManager;
 
 public class Main {

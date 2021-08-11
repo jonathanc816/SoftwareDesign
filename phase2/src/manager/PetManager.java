@@ -54,10 +54,10 @@ public class PetManager extends TemplateInfo {
 
   /** This method creates a new entity.Pet object, adds it to petList, and returns it */
   public int createPet(
-      String petName, String petColour, String petSex, boolean publicity, String status) {
+      String petName, String petColour, String petSex, boolean publicity, String status, String greeting) {
 
     int createPetId = petID;
-    Pet newPet = new Pet(petName, petID, petColour, petSex, publicity, status);
+    Pet newPet = new Pet(petName, petID, petColour, petSex, publicity, status, greeting);
     addPet(newPet);
 
     petID += 1;
