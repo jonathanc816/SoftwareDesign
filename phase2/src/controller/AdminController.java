@@ -4,6 +4,7 @@ import controller.inputChecker.UserNameChecker;
 import controller.inputChecker.ValidUserChecker;
 import entity.Pet;
 import entity.User;
+import manager.TemplateInfo;
 import presenter.Presenter;
 
 import java.util.Set;
@@ -37,31 +38,28 @@ public class AdminController extends ManagerControl{
                     "\nChoose the template info you want to edit:");
             int userChoice = GameController.getUserNum(4);
             if (userChoice == 1){
-                Presenter.showInstruction("The current pet template information is:");
-                Presenter.showInstruction("["+LocalPetManager.getTemplateInfo()+"]");
-                Presenter.showInstruction("This information will be shown when people create a new pet");
-                String newPetIntro = GameController.getUserString("Now enter a new one...");
-                LocalPetManager.setTemplateInfo(newPetIntro);
-                Presenter.showInstruction("You have changed the pet template information to ["+
-                        LocalPetManager.getTemplateInfo()+"] successfully!");
+                editInfo(LocalPetManager, "pet");
             }
             else if (userChoice == 2){
-                Presenter.showInstruction("The current message template information is:");
-                Presenter.showInstruction("["+LocalMessageManager.getTemplateInfo()+"]");
-                Presenter.showInstruction("This information will be shown when people create a new message");
-                String newMessageIntro = GameController.getUserString("Now enter a new one...");
-                LocalMessageManager.setTemplateInfo(newMessageIntro);
-                Presenter.showInstruction("You have changed message template information to ["+
-                        LocalMessageManager.getTemplateInfo()+"] successfully!");
+                editInfo(LocalMessageManager, "message");
             }
             else if (userChoice == 3) {
-                //TODO: edit reminder info
-                System.out.println("edit reminder");
+                editInfo(LocalReminderManager, "reminder");
             }
             else {
                 return;
             }
         }
+    }
+
+    public static void editInfo(TemplateInfo template, String name) {
+        Presenter.showInstruction("The current message template information is:");
+        Presenter.showInstruction("["+template.getTemplateInfo()+"]");
+        Presenter.showInstruction("This information will be shown when people create a new "+name);
+        String newIntro = GameController.getUserString("Now enter a new one...");
+        template.setTemplateInfo(newIntro);
+        Presenter.showInstruction("You have changed "+name+" template information to ["+
+                template.getTemplateInfo()+"] successfully!");
     }
 
     public static void viewUsers() {
@@ -85,7 +83,7 @@ public class AdminController extends ManagerControl{
             }
             else if (selection == 2) {
                 System.out.println("manage reminder");
-                // TODO manage reminder
+                manageReminder(targetUser);
             }
             else if (selection == 3) {
                 System.out.println("suspend user");
@@ -130,6 +128,31 @@ public class AdminController extends ManagerControl{
                 pet.setPublicity(petPublic);
                 Presenter.showInstruction("You have change this pet to "+
                         LocalPetManager.checkPublicity(targetUser.getPetId())+" successfully!\n");
+            }
+            else {
+                return;
+            }
+        }
+    }
+
+    public static void manageReminder(User targetUser){
+        while (true) {
+            Presenter.showInstruction(String.format("Here is the information of %s's reminder:\n" +
+                    "Number of reminders: %d\n" +
+                    "Public/Private: %s\n",
+                    targetUser.getUsername(),
+                    targetUser.getReminders().size(),
+                    LocalReminderManager.checkPublic(targetUser)));
+
+            Presenter.showMenu(new String[]{"View Reminder", "Reminder Setting", "Go Back"},
+                    "Please select your option");
+
+            int choice = GameController.getUserNum(3);
+            if (choice == 1) {
+                ReminderController.viewFriendReminder(targetUser);
+            }
+            else if (choice == 2) {
+                ReminderController.reminderSetting(targetUser);
             }
             else {
                 return;
