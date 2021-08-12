@@ -5,6 +5,7 @@ import entity.User;
 import gateway.StateManager;
 import manager.LoginStatus;
 import presenter.Presenter;
+import timer.UserTimer;
 
 public class UserController extends ManagerControl {
 
@@ -12,7 +13,7 @@ public class UserController extends ManagerControl {
      * Create a new user based on the users input, types include entity.AdminUser, entity.GuestUser, entity.User
      * @param guest value of guest user setting
      */
-    public static void createNewUser(boolean guest) {
+    public static void createNewUser(boolean guest, boolean temporary) {
         User newUser = null;
         if (!guest) {
             String username =
@@ -30,6 +31,14 @@ public class UserController extends ManagerControl {
             newUser = LocalUserManager.createGuestUser();
         }
         LocalUserManager.addUser(newUser);
+
+        if (temporary) {
+            Presenter.showInstruction("Please enter the minutes you want to try (max: 50000).\n" +
+                    "Note that you can no longer access it after time is up.");
+            int trail = GameController.getUserNum(50000);
+            LocalUserManager.addBlockAfter(newUser, UserTimer.getTimeAfterMinutes(trail));
+        }
+
         Presenter.showInstruction("Welcome, " + LocalUserManager.getCurrentUser().getUsername() + "!");
         Presenter.showInstruction(LocalPetManager.getTemplateInfo());
         createUserPet();

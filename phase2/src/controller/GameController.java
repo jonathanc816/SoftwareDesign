@@ -118,18 +118,26 @@ public class GameController {
                 UserController.userLogin(true);
                 justCreated = false;
             }
-            Presenter.showMenu(new String[]{"Login", "Create a new user", "Create a new guest user", "Exit"}, "\nWelcome to Tamagochi, enter a number to");
+            Presenter.showMenu(new String[]{"Login", "Create a New User", "Other User", "Exit"}, "\nWelcome to Tamagochi, enter a number to");
             int input = getUserNum(4);
             if (input == 1) {
                 UserController.userLogin(false);
             }
             else if (input == 2) {
-                UserController.createNewUser(false);
+                UserController.createNewUser(false, false);
                 justCreated = true;
             }
             else if (input == 3) {
-                UserController.createNewUser(true);
-                justCreated = true;
+                Presenter.showMenu(new String[]{"Guest User", "Temporary User"}, "Choose a special user to create...");
+                int input2 = getUserNum(2);
+                if (input2 == 1) {
+                    UserController.createNewUser(true, false);
+                    justCreated = true;
+                }
+                else if (input2 == 2) {
+                    UserController.createNewUser(false, true);
+                    justCreated = true;
+                }
             }
             else {
                 return;
