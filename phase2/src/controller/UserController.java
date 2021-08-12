@@ -3,6 +3,7 @@ package controller;
 import controller.inputChecker.UserNameChecker;
 import entity.User;
 import gateway.StateManager;
+import manager.LoginStatus;
 import presenter.Presenter;
 
 public class UserController extends ManagerControl {
@@ -68,7 +69,9 @@ public class UserController extends ManagerControl {
             username = GameController.getUserString("Please enter your username...");
             password = GameController.getUserString("Please enter the password...");
         }
-        if (justCreated || LocalUserManager.login(username, password)){
+
+        LoginStatus loginStatus = LocalUserManager.login(username, password);
+        if (justCreated || loginStatus.success){
             boolean back = false;
             while (!back) {
                 Presenter.showInstruction("\nWelcome, "+ LocalUserManager.getCurrentUser().getUsername()+"! What would you like to do?");
@@ -102,7 +105,7 @@ public class UserController extends ManagerControl {
             }
         }
         else {
-            Presenter.showInstruction("Wrong username or password!");
+            Presenter.showInstruction(loginStatus.information);
         }
     }
 }

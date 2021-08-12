@@ -3,19 +3,20 @@ package manager;
 import entity.AdminUser;
 import entity.GuestUser;
 import entity.User;
+import timer.UserTimer;
 
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class UserManager implements Serializable {
     private final HashMap<String, User> userList = new HashMap<>();
     private User currentUser = null;
+
+    private final HashMap<User, Date> blockBefore = new HashMap<>();
+    private final HashMap<User, Date> blockAfter = new HashMap<>();
 
     public User getCurrentUser() { return currentUser; }
 
@@ -97,17 +98,16 @@ public class UserManager implements Serializable {
      * @param password password to login with
      * @return boolean value for correct login
      */
-    public boolean login(String username, String password) {
+    public LoginStatus login(String username, String password) {
         User user = this.getUserByName(username);
         if (!isUserExist(username)) {
-            return false;
+            return new LoginStatus(false, "Wrong username or password!");
         }
         assert user != null;
         if (user.getPassword().equals(hasher(password))) {
-            currentUser = user;
-            return true;
+            return blockCheck(user);
         }
-        return false;
+        return new LoginStatus(false, "Wrong username or password!");
     }
 
 
@@ -132,6 +132,43 @@ public class UserManager implements Serializable {
 
     public Set<String> getAllUserNames() {
         return this.userList.keySet();
+    }
+
+    public void addBlockBefore(User user, Date date) {
+        if (blockBefore.containsKey(user)) {
+            blockBefore.get(user).setTime(date.getTime());
+        }
+        else {
+            blockBefore.put(user, date);
+        }
+    }
+
+    public void addBlockAfter(User user, Date date) {
+        if (blockAfter.containsKey(user)) {
+            blockAfter.get(user).setTime(date.getTime());
+        }
+        else {
+            blockAfter.put(user, date);
+        }
+    }
+
+    public LoginStatus blockCheck(User user) {
+        if (blockBefore.containsKey(user)) {
+            if (UserTimer.getCurrentTime().before(blockBefore.get(user))) {
+                return new LoginStatus(
+                        false, "This account is suspended by admin user until "+blockBefore.get(user).toString());
+            }
+        }
+
+        if (blockAfter.containsKey(user)) {
+            if (UserTimer.getCurrentTime().after(blockAfter.get(user))) {
+                return new LoginStatus(
+                        false, "This temporary account is blocked after "+blockAfter.get(user).toString());
+            }
+        }
+
+        currentUser = user;
+        return new LoginStatus(true, "all good");
     }
 }
 

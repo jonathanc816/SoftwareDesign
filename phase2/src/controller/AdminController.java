@@ -6,6 +6,7 @@ import entity.Pet;
 import entity.User;
 import manager.TemplateInfo;
 import presenter.Presenter;
+import timer.UserTimer;
 
 import java.util.Set;
 
@@ -82,12 +83,10 @@ public class AdminController extends ManagerControl{
                 managePet(targetUser);
             }
             else if (selection == 2) {
-                System.out.println("manage reminder");
                 manageReminder(targetUser);
             }
             else if (selection == 3) {
-                System.out.println("suspend user");
-                //TODO suspend user
+                suspendUser(targetUser);
             }
             else {
                 return;
@@ -158,5 +157,14 @@ public class AdminController extends ManagerControl{
                 return;
             }
         }
+    }
+
+    public static void suspendUser(User targetUser) {
+        Presenter.showInstruction(
+                "Please enter the minutes you want to suspend "+targetUser.getUsername()+" (max: 50000)");
+        int suspendTime = GameController.getUserNum(50000);
+        LocalUserManager.addBlockBefore(targetUser, UserTimer.getTimeAfterMinutes(suspendTime));
+        Presenter.showInstruction(
+                "You have suspended "+targetUser.getUsername()+" for "+suspendTime+" minutes from now successfully!\n");
     }
 }
