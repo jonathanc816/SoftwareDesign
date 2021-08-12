@@ -14,6 +14,7 @@ public class User implements Serializable {
     private final ArrayList<Integer> inbox; // setting these to final because we never will reassign them
     private final ArrayList<Integer> reminderList;
     private final ArrayList<String> friendList; //usernames of friends
+    private boolean reminderPublic;
 
 
     /**
@@ -27,6 +28,7 @@ public class User implements Serializable {
         this.inbox = new ArrayList<>();
         this.reminderList = new ArrayList<>();
         this.friendList = new ArrayList<>();
+        this.reminderPublic = true;
     }
 
     public String getUsername() { return this.username; }
@@ -55,8 +57,19 @@ public class User implements Serializable {
 
     public void addReminderId(int reminderId) {reminderList.add(reminderId);}
 
+    public void cleanReminders() {
+        reminderList.clear();
+    }
+
     public ArrayList<String> getFriendList() { return this.friendList; }
 
     public void addFriendName(String username) {friendList.add(username);}
 
+    public boolean isReminderPublic() {
+        return reminderPublic;
+    }
+
+    public void setReminderPublic(boolean reminderPublic) {
+        this.reminderPublic = reminderPublic;
+    }
 }

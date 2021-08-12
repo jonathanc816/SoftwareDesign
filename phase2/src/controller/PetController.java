@@ -10,16 +10,19 @@ public class PetController extends ManagerControl{
      */
     static public void petMenu() {
         while (true) {
-            Presenter.showMenu(new String[] {"See Pet", "Send message", "Edit Pet", "Back"},
+            Presenter.showMenu(new String[] {"See Pet", "Send message", "Reminder", "Edit Pet", "Back"},
                     "You can do these with your pet:");
-            int userChoice = GameController.getUserNum(4);
+            int userChoice = GameController.getUserNum(5);
             if (userChoice == 1) {
                 viewPet(LocalUserManager.getCurrentUser().getPetId());
             }
-            else if (userChoice ==2) {
+            else if (userChoice == 2) {
                 MessageController.createMessage();
             }
             else if (userChoice == 3) {
+                ReminderController.reminderMenu();
+            }
+            else if (userChoice == 4) {
                 editPet();
             }
             else {

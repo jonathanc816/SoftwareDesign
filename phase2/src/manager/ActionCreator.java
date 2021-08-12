@@ -31,7 +31,7 @@ public class ActionCreator implements Serializable {
         // TODO: generate an unique id here
         int reminderId = 0;
 
-        return new Reminder(title, description, dueDate, false, reminderId);
+        return new Reminder(title, false, reminderId);
     }
 
     /**
