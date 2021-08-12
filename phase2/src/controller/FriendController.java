@@ -45,25 +45,47 @@ public class FriendController extends ManagerControl {
                 return;
             }
             else {
-                Presenter.showMenu(friends, "You have "+friendNum+" friend[s], enter a number to see visit them.");
+                Presenter.showMenu(friends, "You have "+friendNum+" friend(s), enter a number to see visit them.");
                 int userChoice = GameController.getUserNum(friendNum + 1);
                 if (userChoice == friendNum + 1) {
                     return;
                 }
                 else {
                     User friend = LocalUserManager.getUserByName(friends.get(userChoice-1));
-                    Pet friendPet = LocalPetManager.findPet(friend.getPetId());
-                    assert friendPet != null;
-                    if (friendPet.getPublicity()) {
-                        PetController.viewPet(friend.getPetId());
-                    }
-                    else {
-                        Presenter.showInstruction("Oh no. Your friend has made their pet private." +
-                                "\nPress any key to go back");
-                        GameController.getUserString();
-                        return;
-                    }
+                    seeUser(friend);
                 }
+            }
+        }
+    }
+
+    static public void seeUser(User user) {
+        while (true) {
+            Presenter.showMenu(new String[]{"See Pet", "View Reminders", "Go Back"},
+                    "This is the homepage of "+user.getUsername()+", you could...");
+            int choice = GameController.getUserNum(3);
+
+            if (choice == 1) {
+                Pet friendPet = LocalPetManager.findPet(user.getPetId());
+                assert friendPet != null;
+                if (friendPet.getPublicity()) {
+                    PetController.viewPet(user.getPetId());
+                }
+                else {
+                    Presenter.showInstruction("Oh no. Your friend has made their pet private.\n");
+                }
+            }
+
+            else if (choice == 2) {
+                if (user.isReminderPublic()) {
+                    ReminderController.viewFriendReminder(user);
+                }
+                else {
+                    Presenter.showInstruction("Oh no. Your friend has made their reminder private.\n");
+                }
+            }
+
+            else {
+                return;
             }
         }
     }
