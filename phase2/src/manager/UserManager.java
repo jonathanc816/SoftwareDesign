@@ -8,8 +8,10 @@ import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class UserManager implements Serializable {
     private final HashMap<String, User> userList = new HashMap<>();
@@ -128,5 +130,8 @@ public class UserManager implements Serializable {
         }
     }
 
+    public Set<String> getAllUserNames() {
+        return this.userList.keySet();
+    }
 }
 
