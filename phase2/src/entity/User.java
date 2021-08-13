@@ -53,6 +53,8 @@ public class User implements Serializable {
 
     public void addInboxId(int messageId) {inbox.add(messageId);}
 
+    public void cleanInbox() { inbox.clear(); }
+
     public ArrayList<Integer> getReminders() { return this.reminderList; }
 
     public void addReminderId(int reminderId) {reminderList.add(reminderId);}

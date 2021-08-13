@@ -21,8 +21,7 @@ public class MessageController extends ManagerControl {
             ArrayList<Message> messages = LocalMessageManager.getMessages(user.getInbox());
 
             if (messages.size() == 0) {
-                Presenter.showInstruction("Your mailbox is empty, enter any letter to go back");
-                GameController.getUserString();
+                Presenter.showInstruction("Your mailbox is empty.");
                 back = true;
             }
             else {
@@ -30,12 +29,18 @@ public class MessageController extends ManagerControl {
                 for (Message message : messages) {
                     fromIdList.add("A message from: "+message.getFromID());
                 }
+                fromIdList.add("Clean Mailbox");
                 fromIdList.add("Back");
 
                 Presenter.showMenu(fromIdList, "You have "+messages.size()+" messages in your mailbox, " +
                         "select number to see detail");
-                int userChoice = GameController.getUserNum(messages.size()+1);
+                int userChoice = GameController.getUserNum(messages.size()+2);
                 if (userChoice == messages.size()+1) {
+                    user.cleanInbox();
+                    Presenter.showInstruction("You have cleaned your mailbox successfully!");
+                    back = true;
+                }
+                else if (userChoice == messages.size()+2) {
                     back = true;
                 }
                 else {
