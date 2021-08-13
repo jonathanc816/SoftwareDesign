@@ -1,6 +1,7 @@
 package controller;
 
 import controller.inputChecker.UserNameChecker;
+import controller.inputChecker.WeakPasswordChecker;
 import entity.User;
 import gateway.StateManager;
 import manager.LoginStatus;
@@ -18,7 +19,7 @@ public class UserController extends ManagerControl {
         if (!guest) {
             String username =
                     GameController.getUserString(new UserNameChecker(), "Please enter a new username...");
-            String password = GameController.getUserString("Please enter a password...");
+            String password = GameController.getUserString(new WeakPasswordChecker(), "Please enter a password...");
             boolean isAdmin = GameController.getUserYesOrNo("Are you an admin user? (y/n)");
             if (isAdmin) {
                 newUser = LocalUserManager.createAdminUser(username, password);
@@ -84,7 +85,7 @@ public class UserController extends ManagerControl {
             boolean back = false;
             while (!back) {
                 Presenter.showInstruction("\nWelcome, "+ LocalUserManager.getCurrentUser().getUsername()+"! What would you like to do?");
-                Presenter.showMenu(new String[] {"Pet", "Mailbox", "Friends", "Admin Setting", "Logout"});
+                Presenter.showMenu(new String[] {"Pet", "Mailbox", "Friends", "Setting", "Logout"});
                 int userChoice = GameController.getUserNum(5);
                 if (userChoice == 1) {
                     PetController.petMenu();
@@ -96,12 +97,7 @@ public class UserController extends ManagerControl {
                     FriendController.friendMenu();
                 }
                 else if (userChoice == 4){
-                    if (LocalUserManager.isCurrentUserAdmin()) {
-                        AdminController.adminMenu();
-                    }
-                    else {
-                        Presenter.showInstruction("Permission denied! You are not an admin user.");
-                    }
+                    settingMenu();
                 }
                 else {
                     if (LocalUserManager.isCurrentUserGuest()) {
@@ -115,6 +111,30 @@ public class UserController extends ManagerControl {
         }
         else {
             Presenter.showInstruction(loginStatus.information);
+        }
+    }
+
+    public static void settingMenu() {
+        while(true) {
+            Presenter.showMenu(new String[]{"Change Password", "Admin Setting", "Back"},
+                    "This is the setting menu, enter a number to...");
+            int choice = GameController.getUserNum(3);
+            if (choice == 1) {
+                String newPassword = GameController.getUserString(new WeakPasswordChecker(), "Please enter a new password...");
+                LocalUserManager.changePassword(LocalUserManager.getCurrentUser(), newPassword);
+                Presenter.showInstruction("You have changed you password successfully!\n");
+            }
+            else if (choice == 2) {
+                if (LocalUserManager.isCurrentUserAdmin()) {
+                    AdminController.adminMenu();
+                }
+                else {
+                    Presenter.showInstruction("Permission denied! You are not an admin user.\n");
+                }
+            }
+            else {
+                return;
+            }
         }
     }
 }

@@ -170,5 +170,9 @@ public class UserManager implements Serializable {
         currentUser = user;
         return new LoginStatus(true, "all good");
     }
+
+    public void changePassword(User user, String newPassword){
+        user.setPassword(hasher(newPassword));
+    }
 }
 
