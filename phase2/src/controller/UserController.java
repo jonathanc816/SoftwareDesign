@@ -84,8 +84,8 @@ public class UserController extends ManagerControl {
         if (justCreated || loginStatus.success){
             boolean back = false;
             while (!back) {
-                Presenter.showInstruction("\nWelcome, "+ LocalUserManager.getCurrentUser().getUsername()+"! What would you like to do?");
-                Presenter.showMenu(new String[] {"Pet", "Mailbox", "Friends", "Setting", "Logout"});
+                Presenter.showMenu(new String[] {"Pet", "Mailbox", "Friends", "Setting", "Logout"},
+                        "\nWelcome, "+ LocalUserManager.getCurrentUser().getUsername()+"! What would you like to do?");
                 int userChoice = GameController.getUserNum(5);
                 if (userChoice == 1) {
                     PetController.petMenu();
@@ -110,7 +110,7 @@ public class UserController extends ManagerControl {
             }
         }
         else {
-            Presenter.showInstruction(loginStatus.information);
+            Presenter.showError(loginStatus.information);
         }
     }
 
@@ -122,7 +122,7 @@ public class UserController extends ManagerControl {
             if (choice == 1) {
                 String newPassword = GameController.getUserString(new WeakPasswordChecker(), "Please enter a new password...");
                 LocalUserManager.changePassword(LocalUserManager.getCurrentUser(), newPassword);
-                Presenter.showInstruction("You have changed you password successfully!\n");
+                Presenter.showNotice("You have changed you password successfully!\n");
             }
             else if (choice == 2) {
                 MessageController.createReport();
@@ -132,7 +132,7 @@ public class UserController extends ManagerControl {
                     AdminController.adminMenu();
                 }
                 else {
-                    Presenter.showInstruction("Permission denied! You are not an admin user.\n");
+                    Presenter.showError("Permission denied! You are not an admin user.\n");
                 }
             }
             else {

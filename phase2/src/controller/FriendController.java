@@ -14,9 +14,7 @@ public class FriendController extends ManagerControl {
     static public void friendMenu() {
         while(true) {
             if (LocalUserManager.isCurrentUserGuest()) {
-                Presenter.showMenu(new String[] {}, "Guest users can't add friends. Press enter to return.");
-                String userChoice = GameController.getUserString();
-                return;
+                Presenter.showNotice("Sorry, guest users can't add friends.");
             }
             Presenter.showMenu(new String[]{"Friend list", "Add friend", "Back"}, "This is your friend menu, you can:");
             int userChoice = GameController.getUserNum(3);
@@ -41,7 +39,7 @@ public class FriendController extends ManagerControl {
         friends.add("Back");
         while (true) {
             if (friendNum == 0) {
-                GameController.getUserString("Your friends list is empty, press any key to go back.");
+                Presenter.showNotice("Empty friend list.\n");
                 return;
             }
             else {
@@ -71,7 +69,7 @@ public class FriendController extends ManagerControl {
                     PetController.viewPet(user.getPetId());
                 }
                 else {
-                    Presenter.showInstruction("Oh no. Your friend has made their pet private.\n");
+                    Presenter.showNotice("Oh no. Your friend has made their pet private.\n");
                 }
             }
 
@@ -80,7 +78,7 @@ public class FriendController extends ManagerControl {
                     ReminderController.viewFriendReminder(user);
                 }
                 else {
-                    Presenter.showInstruction("Oh no. Your friend has made their reminder private.\n");
+                    Presenter.showNotice("Oh no. Your friend has made their reminder private.\n");
                 }
             }
 
@@ -96,18 +94,17 @@ public class FriendController extends ManagerControl {
     static public void addFriends() {
         String friendName = GameController.getUserString("Please enter the name of user you want to add friend...");
         if (LocalUserManager.getCurrentUser().getFriendList().contains(friendName)) {
-            GameController.getUserString("You have already added "+friendName+"! enter any key to go back");
+            Presenter.showNotice("You have already added "+friendName+"!\n");
         }
         else if (friendName.equals(LocalUserManager.getCurrentUser().getUsername())) {
-            GameController.getUserString("You can't add yourself! enter any key to go back");
+            Presenter.showNotice("You can't add yourself!\n");
         }
         else if (LocalUserManager.isUserExist(friendName)) {
             MessageController.createFriendRequest(LocalUserManager.getCurrentUser().getUsername(), friendName);
-            GameController.getUserString(friendName+" has received your friend request. " +
-                    "\nwait for acceptance, enter any key to go back");
+            Presenter.showNotice(friendName+" has received your friend request, wait for acceptance.\n");
         }
         else {
-            GameController.getUserString("This user does not exist, enter any key to go back");
+            Presenter.showNotice("User does not exist\n");
         }
     }
 }

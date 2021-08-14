@@ -29,7 +29,7 @@ public class MessageController extends ManagerControl {
             ArrayList<Message> messages = LocalMessageManager.getMessages(user.getInbox());
 
             if (messages.size() == 0) {
-                Presenter.showInstruction("Your "+name+" is empty.");
+                Presenter.showNotice("Your "+name+" is empty.");
                 back = true;
             }
             else {
@@ -45,7 +45,7 @@ public class MessageController extends ManagerControl {
                 int userChoice = GameController.getUserNum(messages.size()+2);
                 if (userChoice == messages.size()+1) {
                     user.cleanInbox();
-                    Presenter.showInstruction("You have cleaned your "+name+" successfully!");
+                    Presenter.showNotice("You have cleaned your "+name+" successfully!");
                     back = true;
                 }
                 else if (userChoice == messages.size()+2) {
@@ -73,12 +73,10 @@ public class MessageController extends ManagerControl {
                 User toUser = LocalUserManager.getUserByName(message.getToID());
                 fromUser.addFriendName(toUser.getUsername());
                 toUser.addFriendName(fromUser.getUsername());
-                GameController.getUserString("You are friends with "+message.getFromID()+
-                        " now. Enter any letter to go back");
+                Presenter.showNotice("You are friends with "+message.getFromID()+" now.\n");
             }
             else {
-                GameController.getUserString("You have ignored this friend request, " +
-                        "Enter any letter to go back");
+                Presenter.showNotice("You have ignored this friend request.\n");
             }
         }
         else {
@@ -98,10 +96,10 @@ public class MessageController extends ManagerControl {
 
         if (LocalUserManager.isUserExist(toId)) {
             Objects.requireNonNull(LocalUserManager.getUserByName(toId)).addInboxId(messageID);
-            Presenter.showInstruction("Your lovely pet has sent your message to "+toId+". Great!\n");
+            Presenter.showNotice("Your lovely pet has sent your message to "+toId+". Great!\n");
         }
         else {
-            Presenter.showInstruction("Unfortunately, Your pet couldn't find the addressee. Please try again.\n");
+            Presenter.showNotice("Unfortunately, Your pet couldn't find the addressee. Please try again.\n");
         }
     }
 
@@ -110,7 +108,7 @@ public class MessageController extends ManagerControl {
         String content = GameController.getUserString("Please enter your report to all admin users...");
         int messageID = LocalMessageManager.createMessage(fromId, "All Admin Users", content);
         LocalUserManager.adminInbox.addInboxId(messageID);
-        Presenter.showInstruction("All admin users have received you issue. Thanks for your report!\n");
+        Presenter.showNotice("All admin users have received you issue. Thanks for your report!\n");
     }
 
     /**

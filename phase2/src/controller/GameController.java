@@ -140,6 +140,7 @@ public class GameController {
                 }
             }
             else {
+                Presenter.showMenu(new String[]{}, "Thanks for playing Tamagochi. Bye!");
                 return;
             }
         }

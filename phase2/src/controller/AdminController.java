@@ -62,12 +62,12 @@ public class AdminController extends ManagerControl{
         Presenter.showInstruction("This information will be shown when people create a new "+name);
         String newIntro = GameController.getUserString("Now enter a new one...");
         template.setTemplateInfo(newIntro);
-        Presenter.showInstruction("You have changed "+name+" template information to ["+
+        Presenter.showNotice("You have changed "+name+" template information to ["+
                 template.getTemplateInfo()+"] successfully!");
     }
 
     public static void viewUsers() {
-        Presenter.showInstruction("This is the user list, enter a username to manage...");
+        Presenter.showNotice("This is the user list, enter a username to manage...");
         Set<String> allUsers = LocalUserManager.getAllUserNames();
         for (String s: allUsers) {
             Presenter.showInstruction(s);
@@ -121,14 +121,14 @@ public class AdminController extends ManagerControl{
             }
             else if (choice == 2) {
                 pet.setGreeting("[Greeting Deleted By Admin User]");
-                Presenter.showInstruction("You have deleted the greeting message of "
+                Presenter.showNotice("You have deleted the greeting message of "
                         +pet.getPetName()+ "successfully!\n");
             }
             else if (choice == 3) {
                 boolean petPublic = GameController.getUserYesOrNo(
                         "Enter 'y' to make it public or 'n' to make it private");
                 pet.setPublicity(petPublic);
-                Presenter.showInstruction("You have change this pet to "+
+                Presenter.showNotice("You have change this pet to "+
                         LocalPetManager.checkPublicity(targetUser.getPetId())+" successfully!\n");
             }
             else {
@@ -167,7 +167,7 @@ public class AdminController extends ManagerControl{
                 "Please enter the minutes you want to suspend "+targetUser.getUsername()+" (max: 50000)");
         int suspendTime = GameController.getUserNum(50000);
         LocalUserManager.addBlockBefore(targetUser, UserTimer.getTimeAfterMinutes(suspendTime));
-        Presenter.showInstruction(
+        Presenter.showNotice(
                 "You have suspended "+targetUser.getUsername()+" for "+suspendTime+" minutes from now successfully!\n");
     }
 }

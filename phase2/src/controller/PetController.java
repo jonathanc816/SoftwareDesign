@@ -68,7 +68,7 @@ public class PetController extends ManagerControl{
                 String newPetName = GameController.getUserString("Your previous pet name is "+
                         pet.getPetName()+". Please enter a new name...");
                 LocalPetManager.changePetName(user.getPetId(), newPetName);
-                Presenter.showInstruction("You have changed your pet name to "+pet.getPetName()+" successfully!");
+                Presenter.showNotice("You have changed your pet name to "+pet.getPetName()+" successfully!");
             }
             else if (userChoice == 2) {
                 boolean petPublic = GameController.getUserYesOrNo(
@@ -76,7 +76,7 @@ public class PetController extends ManagerControl{
                                 "Enter 'y' to make it public or 'n' to make it private");
                 assert pet != null;
                 pet.setPublicity(petPublic);
-                Presenter.showInstruction("You have change your pet to "+
+                Presenter.showNotice("You have change your pet to "+
                         LocalPetManager.checkPublicity(user.getPetId())+" successfully!");
             }
             else {

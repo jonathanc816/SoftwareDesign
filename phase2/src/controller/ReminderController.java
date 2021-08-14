@@ -35,13 +35,13 @@ public class ReminderController extends ManagerControl{
                 "Please enter the title of the reminder...");
         int reminderId = LocalReminderManager.addReminder(title);
         LocalUserManager.getCurrentUser().addReminderId(reminderId);
-        Presenter.showInstruction("You have created a new reminder successfully\n");
+        Presenter.showNotice("You have created a new reminder successfully\n");
     }
 
     public static int showReminders(User user) {
         ArrayList<Integer> reminderList = user.getReminders();
         if (reminderList.size() == 0) {
-            Presenter.showInstruction("Empty reminder list\n");
+            Presenter.showNotice("Empty reminder list\n");
             return -1;
         }
         else {
@@ -73,11 +73,11 @@ public class ReminderController extends ManagerControl{
             int choice2 = GameController.getUserNum(3);
             if (choice2 == 1) {
                 LocalReminderManager.markComplete(targetReminderID);
-                Presenter.showInstruction("You have marked reminder ("+choice+") as complete successfully!\n");
+                Presenter.showNotice("You have marked reminder ("+choice+") as complete successfully!\n");
             }
             else if (choice2 == 2) {
                 LocalReminderManager.addLike(targetReminderID);
-                Presenter.showInstruction("Reminder ("+choice+")'s like +1\n");
+                Presenter.showNotice("Reminder ("+choice+")'s like +1\n");
             }
         }
     }
@@ -98,7 +98,7 @@ public class ReminderController extends ManagerControl{
             ArrayList<Integer> reminderList = user.getReminders();
             int targetReminderID = reminderList.get(choice - 1);
             LocalReminderManager.addLike(targetReminderID);
-            Presenter.showInstruction("Reminder ("+choice+")'s like +1\n");
+            Presenter.showNotice("Reminder ("+choice+")'s like +1\n");
         }
     }
 
@@ -112,7 +112,7 @@ public class ReminderController extends ManagerControl{
                         "Are you sure to delete all reminders? 'y' for yes, 'n' for no.");
                 if (delete) {
                     user.cleanReminders();
-                    Presenter.showInstruction("You have deleted all reminders successfully!\n");
+                    Presenter.showNotice("You have deleted all reminders successfully!\n");
                 }
             }
             else if (choice == 2) {
@@ -120,7 +120,7 @@ public class ReminderController extends ManagerControl{
                         "Your reminder is "+LocalReminderManager.checkPublic(user)+" to others now.\n" +
                                 "Enter 'y' to make it public or 'n' to make it private");
                 user.setReminderPublic(reminderPublic);
-                Presenter.showInstruction("You have change your pet to "+
+                Presenter.showNotice("You have change your pet to "+
                         LocalReminderManager.checkPublic(user)+" successfully!\n");
             }
             else {

@@ -11,6 +11,14 @@ public class Presenter {
         System.out.println(s);
     }
 
+    static public void showNotice(String s) {
+        showInstruction("\033[1;33m"+s+"\033[0m");
+    }
+
+    static public void showError(String s) {
+        showInstruction("\033[1;31m"+s+"\033[0m");
+    }
+
     /**
      * Shows a numbered list of menu options.
      * @param menu list of strings in the menu
@@ -29,7 +37,7 @@ public class Presenter {
      * @param title title of menu
      */
     static public void showMenu(String[] menu, String title) {
-        System.out.println(title);
+        System.out.println("\033[1;36m"+title+"\033[0m");
         showMenu(menu);
     }
 
@@ -50,7 +58,7 @@ public class Presenter {
      * @param title title of menu
      */
     static public void showMenu(ArrayList<String> menu, String title) {
-        System.out.println(title);
+        System.out.println("\033[1;36m"+title+"\033[0m");
         showMenu(menu);
     }
 }
