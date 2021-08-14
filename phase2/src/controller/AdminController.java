@@ -17,14 +17,17 @@ public class AdminController extends ManagerControl{
     public static void adminMenu() {
         Presenter.showInstruction("Hi! admin user, "+LocalUserManager.getCurrentUser().getUsername());
         while (true) {
-            Presenter.showMenu(new String[]{"Edit template info", "Manage Users", "Go Back"},
+            Presenter.showMenu(new String[]{"Edit template info", "Manage Users", "View Reports", "Go Back"},
                     "\nThis is the admin settings menu, you can:");
-            int userChoice = GameController.getUserNum(3);
+            int userChoice = GameController.getUserNum(4);
             if (userChoice == 1) {
                 editTemplateInfo();
             }
             else if (userChoice == 2) {
                 viewUsers();
+            }
+            else if (userChoice == 3) {
+                MessageController.reportBox();
             }
             else {
                 return;

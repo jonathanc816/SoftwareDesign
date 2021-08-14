@@ -18,6 +18,8 @@ public class UserManager implements Serializable {
     private final HashMap<User, Date> blockBefore = new HashMap<>();
     private final HashMap<User, Date> blockAfter = new HashMap<>();
 
+    public User adminInbox = new User("adminInbox", "adminInbox");
+
     public User getCurrentUser() { return currentUser; }
 
     public void setCurrentUser(User new_user) {

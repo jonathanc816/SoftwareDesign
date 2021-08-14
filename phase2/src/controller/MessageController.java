@@ -2,6 +2,7 @@ package controller;
 
 import entity.Message;
 import entity.User;
+import manager.UserManager;
 import presenter.Presenter;
 
 import java.util.ArrayList;
@@ -14,14 +15,21 @@ public class MessageController extends ManagerControl {
      * Shows a users mailbox and allows them to interact with the mail.
      */
     static public void mailbox() {
+        User user = LocalUserManager.getCurrentUser();
+        viewMails(user, "mailbox");
+    }
+
+    static public void reportBox() {
+        viewMails(LocalUserManager.adminInbox, "report box");
+    }
+
+    static public void viewMails(User user, String name) {
         boolean back = false;
         while (!back) {
-            User user = LocalUserManager.getCurrentUser();
-
             ArrayList<Message> messages = LocalMessageManager.getMessages(user.getInbox());
 
             if (messages.size() == 0) {
-                Presenter.showInstruction("Your mailbox is empty.");
+                Presenter.showInstruction("Your "+name+" is empty.");
                 back = true;
             }
             else {
@@ -29,15 +37,15 @@ public class MessageController extends ManagerControl {
                 for (Message message : messages) {
                     fromIdList.add("A message from: "+message.getFromID());
                 }
-                fromIdList.add("Clean Mailbox");
+                fromIdList.add("Clean "+name);
                 fromIdList.add("Back");
 
-                Presenter.showMenu(fromIdList, "You have "+messages.size()+" messages in your mailbox, " +
+                Presenter.showMenu(fromIdList, "You have "+messages.size()+" messages in your "+name+", " +
                         "select number to see detail");
                 int userChoice = GameController.getUserNum(messages.size()+2);
                 if (userChoice == messages.size()+1) {
                     user.cleanInbox();
-                    Presenter.showInstruction("You have cleaned your mailbox successfully!");
+                    Presenter.showInstruction("You have cleaned your "+name+" successfully!");
                     back = true;
                 }
                 else if (userChoice == messages.size()+2) {
@@ -90,11 +98,19 @@ public class MessageController extends ManagerControl {
 
         if (LocalUserManager.isUserExist(toId)) {
             Objects.requireNonNull(LocalUserManager.getUserByName(toId)).addInboxId(messageID);
-            Presenter.showInstruction("Your lovely pet has sent your message to "+toId+". Great!");
+            Presenter.showInstruction("Your lovely pet has sent your message to "+toId+". Great!\n");
         }
         else {
-            Presenter.showInstruction("Unfortunately, Your pet couldn't find the addressee. Please try again.");
+            Presenter.showInstruction("Unfortunately, Your pet couldn't find the addressee. Please try again.\n");
         }
+    }
+
+    static public void createReport() {
+        String fromId = LocalUserManager.getCurrentUser().getUsername();
+        String content = GameController.getUserString("Please enter your report to all admin users...");
+        int messageID = LocalMessageManager.createMessage(fromId, "All Admin Users", content);
+        LocalUserManager.adminInbox.addInboxId(messageID);
+        Presenter.showInstruction("All admin users have received you issue. Thanks for your report!\n");
     }
 
     /**

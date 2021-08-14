@@ -116,15 +116,18 @@ public class UserController extends ManagerControl {
 
     public static void settingMenu() {
         while(true) {
-            Presenter.showMenu(new String[]{"Change Password", "Admin Setting", "Back"},
+            Presenter.showMenu(new String[]{"Change Password", "Report Issue", "Admin Setting", "Back"},
                     "This is the setting menu, enter a number to...");
-            int choice = GameController.getUserNum(3);
+            int choice = GameController.getUserNum(4);
             if (choice == 1) {
                 String newPassword = GameController.getUserString(new WeakPasswordChecker(), "Please enter a new password...");
                 LocalUserManager.changePassword(LocalUserManager.getCurrentUser(), newPassword);
                 Presenter.showInstruction("You have changed you password successfully!\n");
             }
             else if (choice == 2) {
+                MessageController.createReport();
+            }
+            else if (choice == 3) {
                 if (LocalUserManager.isCurrentUserAdmin()) {
                     AdminController.adminMenu();
                 }
