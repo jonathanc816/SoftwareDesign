@@ -6,7 +6,7 @@ import entity.User;
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class ReminderManager extends TemplateInfo implements Serializable {
+public class ReminderManager extends TemplateInfo {
     /**
      * Stores reminders (list)
      * Get reminder based on id(s) (method (list))

@@ -12,7 +12,7 @@ import java.util.HashMap;
  *    Send messages between users (add message to users mailbox)
  *    Add to messages (entity.Message)
  */
-public class MessageManager extends TemplateInfo implements Serializable {
+public class MessageManager extends TemplateInfo {
 
     public Integer messageID = 0;
     public HashMap<Integer, Message> messageDict = new HashMap<>();

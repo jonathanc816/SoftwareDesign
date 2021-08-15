@@ -10,7 +10,7 @@ import java.util.HashMap;
  *
  * @author Zhi Heng(Justin) Zheng
  */
-public class PetManager extends TemplateInfo implements Serializable {
+public class PetManager extends TemplateInfo {
 
   public Integer petID = 0;
 
