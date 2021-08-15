@@ -2,34 +2,26 @@ package manager;
 
 import entity.Pet;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  * This is the class that stores and manages entity.Pet objects
  *
  * @author Zhi Heng(Justin) Zheng
  */
-public class PetManager extends TemplateInfo {
+public class PetManager extends TemplateInfo implements Serializable {
 
   public Integer petID = 0;
 
-  private List<Pet> petList = new ArrayList<>();
-
-  public List<Pet> getPetList() {
-    return petList;
-  }
-
-  public void setPetList(List<Pet> newPetList) {
-    petList = newPetList;
-  }
+  private final HashMap<Integer, Pet> petMap = new HashMap<>();
 
   public void noPetFound(){
     System.out.println("This pet cannot be found.");
   }
 
   public void addPet(Pet newPet) {
-    petList.add(newPet);
+    petMap.put(newPet.getId(), newPet);
   }
 
   public PetManager(){
@@ -43,11 +35,7 @@ public class PetManager extends TemplateInfo {
    * @param petID this is the ID of the pet we are looking for
    */
   public Pet findPet(int petID) {
-    for (Pet pet : this.petList) {
-      if (pet.getId() == petID) {
-        return pet;
-      }
-    }
+    this.petMap.get(petID);
     noPetFound();
     return null;
   }
@@ -129,12 +117,4 @@ public class PetManager extends TemplateInfo {
     }
     return "This pet cannot be found.";
   }
-//
-//  public String getPetTemplateInfo() {
-//    return petTemplateInfo;
-//  }
-//
-//  public void setPetTemplateInfo(String newInfo) {
-//    this.petTemplateInfo = newInfo;
-//  }
 }

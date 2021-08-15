@@ -2,8 +2,6 @@ package entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
 
 public class User implements Serializable {
 //    private static int globalPetId; // CamelCase convention

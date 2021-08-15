@@ -1,6 +1,5 @@
 package controller;
 
-import controller.inputChecker.UserNameChecker;
 import controller.inputChecker.ValidUserChecker;
 import entity.Pet;
 import entity.User;

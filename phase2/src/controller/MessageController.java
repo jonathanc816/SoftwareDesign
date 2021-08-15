@@ -2,7 +2,6 @@ package controller;
 
 import entity.Message;
 import entity.User;
-import manager.UserManager;
 import presenter.Presenter;
 
 import java.util.ArrayList;
