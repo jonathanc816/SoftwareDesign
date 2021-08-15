@@ -2,6 +2,9 @@ package controller.inputChecker;
 
 import controller.ManagerControl;
 
+/**
+ * Validation checking class that checks if the username is reserved
+ */
 public class UserNameChecker extends ManagerControl implements ValidationChecker{
     /**
      * Check if the user exists or the attempted username is guest (reserved username). Return true if

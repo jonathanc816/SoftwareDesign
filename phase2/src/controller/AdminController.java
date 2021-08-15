@@ -9,6 +9,9 @@ import timer.UserTimer;
 
 import java.util.Set;
 
+/**
+ * Controller for admin options
+ */
 public class AdminController extends ManagerControl{
     /**
      * Shows admin options and allows interaction with different templates.
@@ -34,6 +37,9 @@ public class AdminController extends ManagerControl{
         }
     }
 
+    /**
+     * Shows methods for admin users to edit templates.
+     */
     public static void editTemplateInfo() {
         while (true) {
             Presenter.showMenu(

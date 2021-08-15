@@ -35,7 +35,9 @@ public class PetManager extends TemplateInfo implements Serializable {
    * @param petID this is the ID of the pet we are looking for
    */
   public Pet findPet(int petID) {
-    this.petMap.get(petID);
+    if (this.petMap.get(petID) != null) {
+      return this.petMap.get(petID);
+    }
     noPetFound();
     return null;
   }

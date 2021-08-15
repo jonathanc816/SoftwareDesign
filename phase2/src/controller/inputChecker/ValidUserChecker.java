@@ -2,6 +2,9 @@ package controller.inputChecker;
 
 import controller.ManagerControl;
 
+/**
+ * Check if user is a valid user
+ */
 public class ValidUserChecker extends ManagerControl implements ValidationChecker{
     /**
      * Return true iff username exist
