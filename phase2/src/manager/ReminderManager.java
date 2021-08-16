@@ -67,6 +67,11 @@ public class ReminderManager extends TemplateInfo {
         r.setCompleted(true);
     }
 
+    public void markIncomplete(int reminderID) {
+        Reminder r = getReminder(reminderID);
+        r.setCompleted(false);
+    }
+
     /**
      * @param reminderId reminderid to get
      * @return The reminder
