@@ -10,7 +10,7 @@ import java.util.HashMap;
  * @author Zhi Heng(Justin) Zheng
  */
 public class PetManager extends TemplateInfo {
-
+  /** The ID attached to the Pet object to be retrieved */
   public Integer petID = 0;
 
   private final HashMap<Integer, Pet> petMap = new HashMap<>();

@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class TemplateInfo implements Serializable {
 
     /**
-     * Info for the template.
+     * String containing info for the template
      */
     private String templateInfo;
 

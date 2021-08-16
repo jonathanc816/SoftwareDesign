@@ -6,15 +6,14 @@ import entity.User;
 import java.util.HashMap;
 
 /**
- * Class that manages reminders.
+ * Stores reminders (hashmap)
+ * Get reminder based on id(s) (method (hashmap))
+ * Add to storage (entity.Reminder)
  */
 public class ReminderManager extends TemplateInfo {
-    /**
-     * Stores reminders (hashmap)
-     * Get reminder based on id(s) (method (hashmap))
-     * Add to storage (entity.Reminder)
-     */
+    /** The ID attached to the Reminder object to be retrieved */
     public Integer reminderID = 0;
+    /** A hashmap that maps the reminder ID to the Reminder object */
     private final HashMap<Integer, Reminder> reminderList = new HashMap<>();
 
     /**

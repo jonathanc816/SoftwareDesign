@@ -12,8 +12,9 @@ import java.util.HashMap;
  *    Add to messages (entity.Message)
  */
 public class MessageManager extends TemplateInfo {
-
+    /** The ID attached to the Message object to be retrieved */
     public Integer messageID = 0;
+    /** A hashmap that maps the message ID to the Message object */
     public HashMap<Integer, Message> messageDict = new HashMap<>();
 
     public MessageManager(){
