@@ -17,8 +17,7 @@ getUserString(String instruction) -> Get a users string (calling getUserString) 
 
 getUserString(ValidationChecker p) -> Verifies a users string with the criteria defined in the class p. Gives a warning defined in class p when the input is invalid.
 
-getUserString(ValidationChecker p, String instruction) -> Verifies a users string with the criteria defined in the class p. Gives a warning defined in class p when invalid. Also outputs the instruction before 				     
-						        getting user input.
+getUserString(ValidationChecker p, String instruction) -> Verifies a users string with the criteria defined in the class p. Gives a warning defined in class p when invalid. Also outputs the instruction before getting user input.
 
 As mentioned before, these methods are implemented within the same class (GameController class) and each of them could be used by other classes, in a different context. Any modification or extension to the this class (i.e Add another getUserString), the rest of the program will not be affected and vice versa. 
 
@@ -41,11 +40,12 @@ WeakPasswordChecker -> check the strength of the input password
 
 
 
-
 2. Dependency Injection
     Class/Method:
     controller.AdminController.suspendUser
     timer.UserTimer
+In the AdminController class, the suspendUser method allows the admin to input the desired duration of an account suspension. Given that the duration of account suspension has a strong dependency relationship with the current method, we can use the Dependency Injection Pattern to simplify our code by decoupling some parts of the code in the program. Here, the creation of the object (suspension duration) can be decoupled from the current method (suspendUser) to provide more flexibility. Instead of hard-code the creation of the date object (Date type), in which it requires us to implement the transformation of the user input (int type) to the proper value type for the addBlockBefore parameter, we can create the time object in a separate class. In our program, the creation of the date object is being taken care of by the getTimeAfterMinutes method in the UserTimer class, then the object is passed to the current method for further step. The advantage to implement this pattern is that it allows the possibility to extend or modify the way we want the date object to be without affecting the rest of the code.
+
 
 3. Façade
     Class/Method:
@@ -54,7 +54,10 @@ WeakPasswordChecker -> check the strength of the input password
     controller.UserController
     other controller classes
 
+Our controller classes are the “Façade” that let the client access the particular part of the subsystem functionality. Each of the controller class provides a  certain feature to the client and all controller classes are unique in its own way. Our program contains a various of implementation and complex subsystems, therefore, we apply the Façade Design Pattern to make these subsystems more accessible and meaningful to the clients. One of the major focus in our program is that it contains many features for the clients to use. The fact that not all the subsystems or classes are useful for a particular feature that we want to provide, we need the “Façade” to encapsulate all the related classes/object for the particular feature we are providing. In our program, each feature has its own controller class, which means that a single controller class is only responsible for one actor/feature. The controller class acts as the “Façade” to all the subsystems (manager classes) that provides services from the particular feature. Without the Façade Design Pattern, we would have to directly work with our complex subsystems and various of objects, which it would be difficult to deal with, and not as useful for the clients. 
+
 4. Builder
     Class/Method:
     timer.UserTimer
+
 
