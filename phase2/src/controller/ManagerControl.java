@@ -2,6 +2,9 @@ package controller;
 
 import manager.*;
 
+/**
+ * Storage for all the managers.
+ */
 public class ManagerControl {
 
     public static UserManager LocalUserManager = new UserManager();

@@ -7,6 +7,9 @@ import presenter.Presenter;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * Message controller for Managers.
+ */
 public class MessageController extends ManagerControl {
     static String friendRequest = "Do you want to be friends?";
 
@@ -18,10 +21,18 @@ public class MessageController extends ManagerControl {
         viewMails(user, "mailbox");
     }
 
+    /**
+     * Show inbox for reports
+     */
     static public void reportBox() {
         viewMails(LocalUserManager.adminInbox, "report box");
     }
 
+    /**
+     * @param user user to view the mails of
+     * @param name name of current user
+     * views the mail of a certain user
+     */
     static public void viewMails(User user, String name) {
         boolean back = false;
         while (!back) {
@@ -102,6 +113,9 @@ public class MessageController extends ManagerControl {
         }
     }
 
+    /**
+     * Create a report based on user inputs.
+     */
     static public void createReport() {
         String fromId = LocalUserManager.getCurrentUser().getUsername();
         String content = GameController.getUserString("Please enter your report to all admin users...");

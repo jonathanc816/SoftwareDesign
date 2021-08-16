@@ -132,10 +132,18 @@ public class UserManager implements Serializable {
         }
     }
 
+    /**
+     * @return The usernames of all the users
+     */
     public Set<String> getAllUserNames() {
         return this.userList.keySet();
     }
 
+    /**
+     * Add a block for the user to some date.
+     * @param user User to add the block for
+     * @param date Time to set the block for
+     */
     public void addBlockBefore(User user, Date date) {
         if (blockBefore.containsKey(user)) {
             blockBefore.get(user).setTime(date.getTime());
@@ -145,6 +153,11 @@ public class UserManager implements Serializable {
         }
     }
 
+    /**
+     * Add a block for the user from some date.
+     * @param user User to add the block for
+     * @param date Time to set the block for
+     */
     public void addBlockAfter(User user, Date date) {
         if (blockAfter.containsKey(user)) {
             blockAfter.get(user).setTime(date.getTime());
@@ -154,6 +167,11 @@ public class UserManager implements Serializable {
         }
     }
 
+    /**
+     * Check if the user is blocked
+     * @param user User to check the block for
+     * @return LoginStatus if the user is blocked
+     */
     public LoginStatus blockCheck(User user) {
         if (blockBefore.containsKey(user)) {
             if (UserTimer.getCurrentTime().before(blockBefore.get(user))) {
@@ -173,6 +191,11 @@ public class UserManager implements Serializable {
         return new LoginStatus(true, "all good");
     }
 
+    /**
+     * Change the password of some user
+     * @param user User to change password for
+     * @param newPassword The new password to set
+     */
     public void changePassword(User user, String newPassword){
         user.setPassword(hasher(newPassword));
     }

@@ -34,26 +34,44 @@ public class Template implements Serializable {
         this.instructions = instructions;
     }
 
+    /**
+     * @return get the name of this template
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return get the target of this templaet
+     */
     public String getTarget() {
         return target;
     }
 
+    /**
+     * @return get parameter number
+     */
     public int getParaNum() {
         return paraNum;
     }
 
+    /**
+     * @return get info of this template
+     */
     public String getInfo() {
         return info;
     }
 
+    /**
+     * @param info set info of this template
+     */
     public void setInfo(String info) {
         this.info = info;
     }
 
+    /**
+     * @param instructions set the instructions for thsi template
+     */
     public void setInstructions(String[] instructions) {
         this.instructions = instructions;
     }

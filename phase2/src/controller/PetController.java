@@ -4,6 +4,9 @@ import entity.Pet;
 import entity.User;
 import presenter.Presenter;
 
+/**
+ * Controller for pets.
+ */
 public class PetController extends ManagerControl{
     /**
      * Shows the menu for interaction with pets, and allows for interaction with pets.

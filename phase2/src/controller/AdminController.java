@@ -61,6 +61,10 @@ public class AdminController extends ManagerControl{
         }
     }
 
+    /**
+     * @param template template to edit
+     * @param name new name to change to
+     */
     public static void editInfo(TemplateInfo template, String name) {
         Presenter.showInstruction("The current message template information is:");
         Presenter.showInstruction("["+template.getTemplateInfo()+"]");
@@ -71,6 +75,9 @@ public class AdminController extends ManagerControl{
                 template.getTemplateInfo()+"] successfully!");
     }
 
+    /**
+     * Show all users and allow a choice from those users
+     */
     public static void viewUsers() {
         Presenter.showNotice("This is the user list, enter a username to manage...");
         Set<String> allUsers = LocalUserManager.getAllUserNames();
@@ -82,6 +89,10 @@ public class AdminController extends ManagerControl{
         manageUser(targetUser);
     }
 
+    /**
+     * @param targetUser the user to be managed
+     * Manage a user
+     */
     public static void manageUser(User targetUser) {
         while (true) {
             Presenter.showMenu(new String[]{"Manage Pet", "Manage Reminder", "Suspend User", "Go Back"},
@@ -102,6 +113,10 @@ public class AdminController extends ManagerControl{
         }
     }
 
+    /**
+     * @param targetUser The user that contains the pet
+     * Manage some pet
+     */
     public static void managePet(User targetUser) {
         int petId = targetUser.getPetId();
         Pet pet = LocalPetManager.findPet(petId);
@@ -142,6 +157,10 @@ public class AdminController extends ManagerControl{
         }
     }
 
+    /**
+     * @param targetUser User to manage the reminders of
+     * Manage the reminders of this user
+     */
     public static void manageReminder(User targetUser){
         while (true) {
             Presenter.showInstruction(String.format("Here is the information of %s's reminder:\n" +
@@ -167,6 +186,10 @@ public class AdminController extends ManagerControl{
         }
     }
 
+    /**
+     * @param targetUser user to suspend
+     * suspend a user for some amount of time
+     */
     public static void suspendUser(User targetUser) {
         Presenter.showInstruction(
                 "Please enter the minutes you want to suspend "+targetUser.getUsername()+" (max: 50000)");

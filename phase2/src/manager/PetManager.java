@@ -15,14 +15,24 @@ public class PetManager extends TemplateInfo {
 
   private final HashMap<Integer, Pet> petMap = new HashMap<>();
 
+  /**
+   * Prints a message when no pet has been found
+   */
   public void noPetFound(){
     System.out.println("This pet cannot be found.");
   }
 
+  /**
+   * @param newPet pet to be added
+   * add the new pet to the petmap
+   */
   public void addPet(Pet newPet) {
     petMap.put(newPet.getId(), newPet);
   }
 
+  /**
+   * Initializer
+   */
   public PetManager(){
     this.setTemplateInfo("Now create your pet!");
   }

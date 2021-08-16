@@ -7,6 +7,9 @@ import presenter.Presenter;
 import java.util.ArrayList;
 
 public class ReminderController extends ManagerControl{
+    /**
+     * Show menu for reminders.
+     */
     public static void reminderMenu() {
         while(true) {
             Presenter.showMenu(new String[]{"Create Reminder", "View Reminder", "Reminder Setting", "Go Back"},

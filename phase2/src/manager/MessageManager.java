@@ -43,6 +43,10 @@ public class MessageManager extends TemplateInfo {
         messageID += 1;
     }
 
+    /**
+     * @param messageID get the message from message id
+     * @return the message
+     */
     public Message getMessage(int messageID) {
         return messageDict.get(messageID);
     }

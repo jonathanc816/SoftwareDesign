@@ -2,6 +2,9 @@ package entity;
 
 import java.io.Serializable;
 
+/**
+ * Entity c
+ */
 public class Message implements Serializable {
     private final String fromID;
     private String toID;
@@ -18,13 +21,30 @@ public class Message implements Serializable {
         this.toID = toID;
         this.content = content;
     }
+
+    /**
+     * @return content of message
+     */
     public String getContent(){return this.content;}
 
+    /**
+     * @return userid of message sender
+     */
     public String getFromID(){return this.fromID;}
 
+    /**
+     * @return userid of message receiver
+     */
     public String getToID(){return this.toID;}
 
+    /**
+     * @param newContent content to set message to
+     * set the content of the message
+     */
     public void setContent(String newContent){this.content = newContent;}
 
+    /**
+     * @param newToID
+     */
     public void setToID(String newToID){this.toID = newToID;}
 }

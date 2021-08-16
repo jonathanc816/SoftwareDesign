@@ -1,5 +1,8 @@
 package entity;
 
+/**
+ * Subclass of User that represents a guest user.
+ */
 public class GuestUser extends User {
 
     /**

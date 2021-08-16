@@ -5,19 +5,29 @@ import entity.User;
 
 import java.util.HashMap;
 
+/**
+ * Class that manages reminders.
+ */
 public class ReminderManager extends TemplateInfo {
     /**
-     * Stores reminders (list)
-     * Get reminder based on id(s) (method (list))
+     * Stores reminders (hashmap)
+     * Get reminder based on id(s) (method (hashmap))
      * Add to storage (entity.Reminder)
      */
     public Integer reminderID = 0;
     private final HashMap<Integer, Reminder> reminderList = new HashMap<>();
 
+    /**
+     * Initializer for ReminderManager
+     */
     public ReminderManager() {
         setTemplateInfo("Now you are creating a reminder.");
     }
 
+    /**
+     * @param title reminder title
+     * @return return the reminder id
+     */
     public int addReminder(String title)
     {
         Reminder reminder = new Reminder(title, false, this.reminderID);
@@ -40,16 +50,28 @@ public class ReminderManager extends TemplateInfo {
         return r.getTitle()+" INCOMPLETE, like("+r.getLike()+")";
     }
 
+    /**
+     * add like to reminder
+     * @param reminderID reminder to search
+     */
     public void addLike(int reminderID) {
         Reminder r = getReminder(reminderID);
         r.addLike();
     }
 
+    /**
+     * mark a reminder as complete
+     * @param reminderID reminder to mark as complete
+     */
     public void markComplete(int reminderID) {
         Reminder r = getReminder(reminderID);
         r.setCompleted(true);
     }
 
+    /**
+     * @param reminderId reminderid to get
+     * @return The reminder
+     */
     public Reminder getReminder(int reminderId) {
         if (reminderList.get(reminderId) != null) {
             return reminderList.get(reminderId);
@@ -58,6 +80,10 @@ public class ReminderManager extends TemplateInfo {
         return null;
     }
 
+    /**
+     * @param user User object to check if public
+     * @return Status of user publicity
+     */
     public String checkPublic(User user) {
         if (user.isReminderPublic()) {
             return "public";

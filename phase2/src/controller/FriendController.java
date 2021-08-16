@@ -6,6 +6,9 @@ import presenter.Presenter;
 
 import java.util.ArrayList;
 
+/**
+ * Controller for friends.
+ */
 public class FriendController extends ManagerControl {
 
     /**
@@ -56,6 +59,10 @@ public class FriendController extends ManagerControl {
         }
     }
 
+    /**
+     * @param user user to see
+     * Allows you to see a user
+     */
     static public void seeUser(User user) {
         while (true) {
             Presenter.showMenu(new String[]{"See Pet", "View Reminders", "Go Back"},

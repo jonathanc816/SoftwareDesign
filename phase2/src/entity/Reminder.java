@@ -2,6 +2,9 @@ package entity;
 
 import java.io.Serializable;
 
+/**
+ * The class that represents a pet
+ */
 public class Reminder implements Serializable {
     private final String title;
     private boolean completed;
@@ -21,30 +24,44 @@ public class Reminder implements Serializable {
         this.reminderId = reminderId;
     }
 
+    /**
+     * @return The title of this reminder
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * @return Completion status of this reminder
+     */
     public boolean getCompleted() {
         return completed;
     }
 
+    /**
+     * @return Get a reminderid
+     */
     public int getReminderId() {
         return reminderId;
     }
 
-    public boolean isCompleted() {
-        return completed;
-    }
-
+    /**
+     * @param completed set completion
+     */
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
 
+    /**
+     * @return get like amounts of this reminder
+     */
     public int getLike() {
         return like;
     }
 
+    /**
+     * add one like to this reminder
+     */
     public void addLike() {
         this.like = this.like + 1;
     }

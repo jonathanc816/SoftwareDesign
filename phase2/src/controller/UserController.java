@@ -8,6 +8,9 @@ import manager.LoginStatus;
 import presenter.Presenter;
 import timer.UserTimer;
 
+/**
+ * Controller for users.
+ */
 public class UserController extends ManagerControl {
 
     /**
@@ -45,6 +48,9 @@ public class UserController extends ManagerControl {
         createUserPet();
     }
 
+    /**
+     * Create a pet for a user based on the input values.
+     */
     public static void createUserPet() {
         User currentUser = LocalUserManager.getCurrentUser();
         String petName = GameController.getUserString("Please enter the name of your pet...");
@@ -114,6 +120,9 @@ public class UserController extends ManagerControl {
         }
     }
 
+    /**
+     * Menu for settings, allows you to change password, report issues or access admin panel.
+     */
     public static void settingMenu() {
         while(true) {
             Presenter.showMenu(new String[]{"Change Password", "Report Issue", "Admin Setting", "Back"},

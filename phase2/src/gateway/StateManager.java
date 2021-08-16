@@ -5,7 +5,13 @@ import manager.*;
 
 import java.io.*;
 
+/**
+ * Manager for all the states of the managers.
+ */
 public class StateManager extends ManagerControl {
+    /**
+     * Save the state of the manager to file.
+     */
     public static void saveState() {
         try {
             FileOutputStream fileOut = new FileOutputStream("Files/ObjectManager.ser");
@@ -23,6 +29,10 @@ public class StateManager extends ManagerControl {
             i.printStackTrace();
         }
     }
+
+    /**
+     * Restore the state of the managers from file.
+     */
     public static void restoreState() {
         try {
             FileInputStream fileIn = new FileInputStream("Files/ObjectManager.ser");

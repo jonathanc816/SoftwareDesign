@@ -6,6 +6,9 @@ import presenter.Presenter;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Controller for games.
+ */
 public class GameController {
     /**
      * This function takes in a users input and returns it as a string.
