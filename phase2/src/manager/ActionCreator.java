@@ -24,11 +24,9 @@ public class ActionCreator implements Serializable {
         String title = args.get(0);
         String description = args.get(1);
 
-        // TODO: need type change for dueDate
         String dueDateInput = args.get(2);
         Date dueDate = new Date();
 
-        // TODO: generate an unique id here
         int reminderId = 0;
 
         return new Reminder(title, false, reminderId);

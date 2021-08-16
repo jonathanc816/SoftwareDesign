@@ -67,7 +67,7 @@ public class UserManager implements Serializable {
      * @param password Password value
      * @return a user object
      */
-    public User createUser(String name, String password) { // change this later to encompass all
+    public User createUser(String name, String password) {
         password = this.hasher(password);
         return new User(name, password);
     }

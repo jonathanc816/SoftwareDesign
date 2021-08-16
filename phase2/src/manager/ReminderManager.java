@@ -3,7 +3,6 @@ package manager;
 import entity.Reminder;
 import entity.User;
 
-import java.io.Serializable;
 import java.util.HashMap;
 
 public class ReminderManager extends TemplateInfo {
