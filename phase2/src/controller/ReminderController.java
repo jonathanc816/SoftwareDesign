@@ -72,19 +72,19 @@ public class ReminderController extends ManagerControl{
             ArrayList<Integer> reminderList = user.getReminders();
             int targetReminderID = reminderList.get(choice - 1);
 
-            Presenter.showMenu(new String[]{"Mark Complete", "Like It", "Mark Incomplete", "Go Back"}, "For reminder ("+choice+"), you can:");
+            Presenter.showMenu(new String[]{"Mark Complete", "Mark Incomplete", "Like It", "Go Back"}, "For reminder ("+choice+"), you can:");
             int choice2 = GameController.getUserNum(4);
             if (choice2 == 1) {
                 LocalReminderManager.markComplete(targetReminderID);
                 Presenter.showNotice("You have marked reminder ("+choice+") as complete successfully!\n");
             }
-            else if (choice2 == 3) {
-                LocalReminderManager.addLike(targetReminderID);
-                Presenter.showNotice("Reminder ("+choice+")'s like +1\n");
-            }
             else if (choice2 == 2) {
                 LocalReminderManager.markIncomplete(targetReminderID);
                 Presenter.showNotice("You have marked reminder ("+choice+") as incomplete successfully!\n");
+            }
+            else if (choice2 == 3) {
+                LocalReminderManager.addLike(targetReminderID);
+                Presenter.showNotice("Reminder ("+choice+")'s like +1\n");
             }
         }
     }
