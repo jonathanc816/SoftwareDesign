@@ -114,8 +114,6 @@ way. Our program contains a various of implementation and complex subsystems, th
     we would have to directly work with our complex subsystems and various of objects, which it would be difficult to deal
     with, and not as useful for the clients.
 
-4. Builder
-    Class/Method:
-    timer.UserTimer
+
 
 

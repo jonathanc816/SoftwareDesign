@@ -104,14 +104,18 @@ public class MessageController extends ManagerControl {
         Presenter.showInstruction(LocalMessageManager.getTemplateInfo()+"\n");
         String toId = GameController.getUserString("Please enter the username of the addressee...");
         String content = GameController.getUserString("Please enter the content of the message...");
-        int messageID = LocalMessageManager.createMessage(fromId, toId, content);
 
-        if (LocalUserManager.isUserExist(toId)) {
-            Objects.requireNonNull(LocalUserManager.getUserByName(toId)).addInboxId(messageID);
-            Presenter.showNotice("Your lovely pet has sent your message to "+toId+". Great!\n");
-        }
-        else {
-            Presenter.showNotice("Unfortunately, Your pet couldn't find the addressee. Please try again.\n");
+        boolean userInput = GameController.getUserYesOrNo("Enter 'y' to send it or 'n' to go back");
+        if (userInput) {
+            int messageID = LocalMessageManager.createMessage(fromId, toId, content);
+
+            if (LocalUserManager.isUserExist(toId)) {
+                Objects.requireNonNull(LocalUserManager.getUserByName(toId)).addInboxId(messageID);
+                Presenter.showNotice("Your lovely pet has sent your message to "+toId+". Great!\n");
+            }
+            else {
+                Presenter.showNotice("Unfortunately, Your pet couldn't find the addressee. Please try again.\n");
+            }
         }
     }
 
