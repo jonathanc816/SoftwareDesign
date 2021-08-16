@@ -5,38 +5,77 @@ Design Pattern Used in the Project
 
 controller.GameController.getUserString:
 
-In the present program, we need to have various kinds of messages to be printed out based on the user's inputs. Instead of implementing different algorithms of toString methods for controller classes that required them, we can make use of the Strategy Pattern. To use this design pattern, we would encapsulate different versions of algorithm that belong to the same family in the same class. In our program, there are various kinds of inputs of different context from classes in the controller layer to pass to the toString methods. These toString methods are differ in their behaviour, but all have to return a string of messages. 
+In the present program, we need to have various kinds of messages to be printed out based on the user's inputs. Instead
+of implementing different algorithms of toString methods for controller classes that required them, we can make use of
+the Strategy Pattern. To use this design pattern, we would encapsulate different versions of algorithm that belong to
+the same family in the same class. In our program, there are various kinds of inputs of different context from classes
+in the controller layer to pass to the toString methods. These toString methods are differ in their behaviour, but all
+have to return a string of messages.
 
 There are 4 different toString methods called getUserString (function overloading) implemented in the GameController class:
-All the overloading methods below have different behaviours/algorithms, but belongs to the same family as they are all toString methods. 
+All the overloading methods below have different behaviours/algorithms, but belongs to the same family as they are all
+toString methods.
 * Overloading -> same name but different signatures
 
 getUserString() -> This function takes in a users input and returns it as a string.
 
 getUserString(String instruction) -> Get a users string (calling getUserString) while displaying the instructions.
 
-getUserString(ValidationChecker p) -> Verifies a users string with the criteria defined in the class p. Gives a warning defined in class p when the input is invalid.
+getUserString(ValidationChecker p) -> Verifies a users string with the criteria defined in the class p. Gives a warning
+defined in class p when the input is invalid.
 
-getUserString(ValidationChecker p, String instruction) -> Verifies a users string with the criteria defined in the class p. Gives a warning defined in class p when invalid. Also outputs the instruction before getting user input.
+getUserString(ValidationChecker p, String instruction) -> Verifies a users string with the criteria defined in the
+class p. Gives a warning defined in class p when invalid. Also outputs the instruction before getting user input.
 
-As mentioned before, these methods are implemented within the same class (GameController class) and each of them could be used by other classes, in a different context. Any modification or extension to the this class (i.e Add another getUserString), the rest of the program will not be affected and vice versa. 
+As mentioned before, these methods are implemented within the same class (GameController class) and each of them could
+be used by other classes, in a different context. Any modification or extension to the this class
+(i.e Add another getUserString), the rest of the program will not be affected and vice versa.
 
 
 inputChecker.*
 
-Since this is an interactive program, where users can enter inputs to make the program do some actions, various checkers to check for possible valid inputs are needed. Different input checkers were implemented
-to ensure the program does not break from user's input as their inputs interact with our controller classes. Here, we use the Strategy Pattern to encapsulate these checkers in the same family, in which the "ValidationChecker" (a checker interface) was implemented so that checkers with different behaviours can implement the interface to achieve polymorphism. The advantage of applying the Strategy Design Pattern here is that it decouples the implementation of the controller classes from the implementation of the checkers algorithm and avoids conditional-infested code for each of the controller class that uses them.
+Since this is an interactive program, where users can enter inputs to make the program do some actions, various checkers
+to check for possible valid inputs are needed. Different input checkers were implemented to ensure the program does not
+ break from user's input as their inputs interact with our controller classes. Here, we use the Strategy Pattern to
+ encapsulate these checkers in the same family, in which the "ValidationChecker" (a checker interface) was implemented
+ so that checkers with different behaviours can implement the interface to achieve polymorphism. The advantage of applying
+ the Strategy Design Pattern here is that it decouples the implementation of the controller classes from the implementation
+ of the checkers algorithm and avoids conditional-infested code for each of the controller class that uses them.
 
-In our program, there are 4 input checkers that all implemented the "ValidationChecker" interface located in the inputChecker file, in which each checker would have to implement the abstract methods, check() and warning(), from that interface. 
+In our program, there are 4 input checkers that all implemented the "ValidationChecker" interface located in the
+inputChecker file, in which each checker would have to implement the abstract methods, check() and warning(), from that interface.
 Here are the 4 different strategies of input checkers implemented in our program, which are separated into its own class:
 
 NoneEmptyChecker -> check if the user's input is non-empty
 
-UserNameChecker -> check if the input username is in the hashmap (return false if it is a non-registered username) or the current user is a guest user 
+UserNameChecker -> check if the input username is in the hashmap (return false if it is a non-registered username) or
+the current user is a guest user
 
 ValidUserChecker -> check if the current user exist 
 
 WeakPasswordChecker -> check the strength of the input password
+
+Presenter
+
+In the Presenter class, there are several overloading functions, showMenu, that are responsible for options display in
+our interactive program. Each showMenu method has different parameters than the others and has different behaviours.
+Here, we use the Strategy Design Pattern to achieve code decoupling and extensively simplified the program by implementing
+these options displayers in a separate classes away from the controller classes. In our program, there are many places where
+the option menus are required so that users can choose the way they want to interact with the program. Therefore, we want to
+avoid implementing the menu display algorithm in the same class as the controller class that needed this service, it would be
+repetitive to implement similar code for different context (features in controller classes) and difficult to deal with .
+Using the Strategy pattern here, the algorithm of menu display can be extended (add new way of displaying the menu) or
+modified without affecting the rest of the code (mainly the controller classes that implement them).
+Below are the four menu displaying methods in the Presenter class that are differ in parameter and menu displaying behaviour.
+
+showMenu(String[] menu)
+
+showMenu(String[] menu, String title)
+
+showMenu(ArrayList<String> menu)
+
+showMenu(ArrayList<String> menu, String title)
+
 
 
 
@@ -44,7 +83,16 @@ WeakPasswordChecker -> check the strength of the input password
     Class/Method:
     controller.AdminController.suspendUser
     timer.UserTimer
-In the AdminController class, the suspendUser method allows the admin to input the desired duration of an account suspension. Given that the duration of account suspension has a strong dependency relationship with the current method, we can use the Dependency Injection Pattern to simplify our code by decoupling some parts of the code in the program. Here, the creation of the object (suspension duration) can be decoupled from the current method (suspendUser) to provide more flexibility. Instead of hard-code the creation of the date object (Date type), in which it requires us to implement the transformation of the user input (int type) to the proper value type for the addBlockBefore parameter, we can create the time object in a separate class. In our program, the creation of the date object is being taken care of by the getTimeAfterMinutes method in the UserTimer class, then the object is passed to the current method for further step. The advantage to implement this pattern is that it allows the possibility to extend or modify the way we want the date object to be without affecting the rest of the code.
+In the AdminController class, the suspendUser method allows the admin to input the desired duration of an account
+suspension. Given that the duration of account suspension has a strong dependency relationship with the current method,
+we can use the Dependency Injection Pattern to simplify our code by decoupling some parts of the code in the program.
+Here, the creation of the object (suspension duration) can be decoupled from the current method (suspendUser) to provide
+ more flexibility. Instead of hard-code the creation of the date object (Date type), in which it requires us to implement
+  the transformation of the user input (int type) to the proper value type for the addBlockBefore parameter, we can
+  create the time object in a separate class. In our program, the creation of the date object is being taken care of by
+   the getTimeAfterMinutes method in the UserTimer class, then the object is passed to the current method for further step.
+   The advantage to implement this pattern is that it allows the possibility to extend or modify the way we want the date
+   object to be without affecting the rest of the code.
 
 
 3. Façade
@@ -54,7 +102,17 @@ In the AdminController class, the suspendUser method allows the admin to input t
     controller.UserController
     other controller classes
 
-Our controller classes are the “Façade” that let the client access the particular part of the subsystem functionality. Each of the controller class provides a  certain feature to the client and all controller classes are unique in its own way. Our program contains a various of implementation and complex subsystems, therefore, we apply the Façade Design Pattern to make these subsystems more accessible and meaningful to the clients. One of the major focus in our program is that it contains many features for the clients to use. The fact that not all the subsystems or classes are useful for a particular feature that we want to provide, we need the “Façade” to encapsulate all the related classes/object for the particular feature we are providing. In our program, each feature has its own controller class, which means that a single controller class is only responsible for one actor/feature. The controller class acts as the “Façade” to all the subsystems (manager classes) that provides services from the particular feature. Without the Façade Design Pattern, we would have to directly work with our complex subsystems and various of objects, which it would be difficult to deal with, and not as useful for the clients. 
+Our controller classes are the “Façade” that let the client access the particular part of the subsystem functionality.
+Each of the controller class provides a  certain feature to the client and all controller classes are unique in its own
+way. Our program contains a various of implementation and complex subsystems, therefore, we apply the Façade Design Pattern
+ to make these subsystems more accessible and meaningful to the clients. One of the major focus in our program is that
+  it contains many features for the clients to use. The fact that not all the subsystems or classes are useful for a
+  particular feature that we want to provide, we need the “Façade” to encapsulate all the related classes/object for
+  the particular feature we are providing. In our program, each feature has its own controller class, which means that a
+   single controller class is only responsible for one actor/feature. The controller class acts as the “Façade” to all
+   the subsystems (manager classes) that provides services from the particular feature. Without the Façade Design Pattern,
+    we would have to directly work with our complex subsystems and various of objects, which it would be difficult to deal
+    with, and not as useful for the clients.
 
 4. Builder
     Class/Method:
