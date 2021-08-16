@@ -78,11 +78,11 @@ public class ReminderController extends ManagerControl{
                 LocalReminderManager.markComplete(targetReminderID);
                 Presenter.showNotice("You have marked reminder ("+choice+") as complete successfully!\n");
             }
-            else if (choice2 == 2) {
+            else if (choice2 == 3) {
                 LocalReminderManager.addLike(targetReminderID);
                 Presenter.showNotice("Reminder ("+choice+")'s like +1\n");
             }
-            else if (choice2 == 3) {
+            else if (choice2 == 2) {
                 LocalReminderManager.markIncomplete(targetReminderID);
                 Presenter.showNotice("You have marked reminder ("+choice+") as incomplete successfully!\n");
             }
