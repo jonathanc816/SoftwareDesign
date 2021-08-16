@@ -113,6 +113,8 @@ public class User implements Serializable {
      */
     public void addFriendName(String username) {friendList.add(username);}
 
+    public void removeFriendName(String username) {friendList.remove(username);}
+
     /**
      * @return public status of reminder
      */

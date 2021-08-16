@@ -65,9 +65,9 @@ public class FriendController extends ManagerControl {
      */
     static public void seeUser(User user) {
         while (true) {
-            Presenter.showMenu(new String[]{"See Pet", "View Reminders", "Go Back"},
+            Presenter.showMenu(new String[]{"See Pet", "View Reminders", "Delete Friend", "Go Back"},
                     "This is the homepage of "+user.getUsername()+", you could...");
-            int choice = GameController.getUserNum(3);
+            int choice = GameController.getUserNum(4);
 
             if (choice == 1) {
                 Pet friendPet = LocalPetManager.findPet(user.getPetId());
@@ -87,6 +87,10 @@ public class FriendController extends ManagerControl {
                 else {
                     Presenter.showNotice("Oh no. Your friend has made their reminder private.\n");
                 }
+            }
+
+            else if (choice == 3){
+                deleteFriend();
             }
 
             else {
@@ -113,5 +117,27 @@ public class FriendController extends ManagerControl {
         else {
             Presenter.showNotice("User does not exist\n");
         }
+    }
+
+    static public void deleteFriend() {
+        String friendName = GameController.getUserString("Please enter the name of user you want to delete friend...");
+        if (!LocalUserManager.getCurrentUser().getFriendList().contains(friendName)) {
+            Presenter.showNotice(friendName+" is not in your friend list"+"!\n");
+        }
+        else if (friendName.equals(LocalUserManager.getCurrentUser().getUsername())) {
+            Presenter.showNotice("You can't delete yourself!\n");
+        }
+
+        else if (LocalUserManager.getCurrentUser().getFriendList().contains(friendName)) {
+            User toUser = LocalUserManager.getUserByName(friendName);
+            LocalUserManager.getCurrentUser().removeFriendName(friendName);
+            toUser.removeFriendName(LocalUserManager.getCurrentUser().getUsername());
+            Presenter.showNotice("You have successfully deleted "+friendName+"!\n");
+        }
+
+        else {
+            Presenter.showNotice("User does not exist\n");
+        }
+
     }
 }
