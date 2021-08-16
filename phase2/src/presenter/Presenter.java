@@ -11,10 +11,18 @@ public class Presenter {
         System.out.println(s);
     }
 
+    /**
+     * Show some notice to the user.
+     * @param s Some notice
+     */
     static public void showNotice(String s) {
         showInstruction("\033[1;33m"+s+"\033[0m");
     }
 
+    /**
+     * Show some error to the user.
+     * @param s Some error
+     */
     static public void showError(String s) {
         showInstruction("\033[1;31m"+s+"\033[0m");
     }
