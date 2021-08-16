@@ -1,0 +1,60 @@
+Design Pattern Used in the Project
+
+1. Strategy
+    Class/Method:
+
+controller.GameController.getUserString:
+
+In the present program, we need to have various kinds of messages to be printed out based on the user's inputs. Instead of implementing different algorithms of toString methods for controller classes that required them, we can make use of the Strategy Pattern. To use this design pattern, we would encapsulate different versions of algorithm that belong to the same family in the same class. In our program, there are various kinds of inputs of different context from classes in the controller layer to pass to the toString methods. These toString methods are differ in their behaviour, but all have to return a string of messages. 
+
+There are 4 different toString methods called getUserString (function overloading) implemented in the GameController class:
+All the overloading methods below have different behaviours/algorithms, but belongs to the same family as they are all toString methods. 
+* Overloading -> same name but different signatures
+
+getUserString() -> This function takes in a users input and returns it as a string.
+
+getUserString(String instruction) -> Get a users string (calling getUserString) while displaying the instructions.
+
+getUserString(ValidationChecker p) -> Verifies a users string with the criteria defined in the class p. Gives a warning defined in class p when the input is invalid.
+
+getUserString(ValidationChecker p, String instruction) -> Verifies a users string with the criteria defined in the class p. Gives a warning defined in class p when invalid. Also outputs the instruction before 				     
+						        getting user input.
+
+As mentioned before, these methods are implemented within the same class (GameController class) and each of them could be used by other classes, in a different context. Any modification or extension to the this class (i.e Add another getUserString), the rest of the program will not be affected and vice versa. 
+
+
+inputChecker.*
+
+Since this is an interactive program, where users can enter inputs to make the program do some actions, various checkers to check for possible valid inputs are needed. Different input checkers were implemented
+to ensure the program does not break from user's input as their inputs interact with our controller classes. Here, we use the Strategy Pattern to encapsulate these checkers in the same family, in which the "ValidationChecker" (a checker interface) was implemented so that checkers with different behaviours can implement the interface to achieve polymorphism. The advantage of applying the Strategy Design Pattern here is that it decouples the implementation of the controller classes from the implementation of the checkers algorithm and avoids conditional-infested code for each of the controller class that uses them.
+
+In our program, there are 4 input checkers that all implemented the "ValidationChecker" interface located in the inputChecker file, in which each checker would have to implement the abstract methods, check() and warning(), from that interface. 
+Here are the 4 different strategies of input checkers implemented in our program, which are separated into its own class:
+
+NoneEmptyChecker -> check if the user's input is non-empty
+
+UserNameChecker -> check if the input username is in the hashmap (return false if it is a non-registered username) or the current user is a guest user 
+
+ValidUserChecker -> check if the current user exist 
+
+WeakPasswordChecker -> check the strength of the input password
+
+
+
+
+2. Dependency Injection
+    Class/Method:
+    controller.AdminController.suspendUser
+    timer.UserTimer
+
+3. Façade
+    Class/Method:
+    controller.MessageController
+    controller.ReminderController
+    controller.UserController
+    other controller classes
+
+4. Builder
+    Class/Method:
+    timer.UserTimer
+
