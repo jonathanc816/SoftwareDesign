@@ -37,10 +37,10 @@ public class FriendController extends ManagerControl {
      * Show a list of the current users friends and interact with those friends.
      */
     static public void seeFriends() {
-        ArrayList<String> friends = new ArrayList<>(LocalUserManager.getCurrentUser().getFriendList());
-        int friendNum = friends.size();
-        friends.add("Back");
         while (true) {
+            ArrayList<String> friends = new ArrayList<>(LocalUserManager.getCurrentUser().getFriendList());
+            int friendNum = friends.size();
+            friends.add("Back");
             if (friendNum == 0) {
                 Presenter.showNotice("Empty friend list.\n");
                 return;
@@ -90,7 +90,8 @@ public class FriendController extends ManagerControl {
             }
 
             else if (choice == 3){
-                deleteFriend();
+                deleteFriend(user.getUsername());
+                return;
             }
 
             else {
@@ -119,8 +120,7 @@ public class FriendController extends ManagerControl {
         }
     }
 
-    static public void deleteFriend() {
-        String friendName = GameController.getUserString("Please enter the name of user you want to delete friend...");
+    static public void deleteFriend(String friendName) {
         if (!LocalUserManager.getCurrentUser().getFriendList().contains(friendName)) {
             Presenter.showNotice(friendName+" is not in your friend list"+"!\n");
         }

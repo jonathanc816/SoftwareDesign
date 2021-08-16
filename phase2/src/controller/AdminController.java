@@ -142,7 +142,7 @@ public class AdminController extends ManagerControl{
             else if (choice == 2) {
                 pet.setGreeting("[Greeting Deleted By Admin User]");
                 Presenter.showNotice("You have deleted the greeting message of "
-                        +pet.getPetName()+ "successfully!\n");
+                        +pet.getPetName()+ " successfully!\n");
             }
             else if (choice == 3) {
                 boolean petPublic = GameController.getUserYesOrNo(

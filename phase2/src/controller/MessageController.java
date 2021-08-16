@@ -81,8 +81,10 @@ public class MessageController extends ManagerControl {
             if (UserInput) {
                 User fromUser = LocalUserManager.getUserByName(message.getFromID());
                 User toUser = LocalUserManager.getUserByName(message.getToID());
-                fromUser.addFriendName(toUser.getUsername());
-                toUser.addFriendName(fromUser.getUsername());
+                if (!fromUser.getFriendList().contains(toUser.getUsername())) {
+                    fromUser.addFriendName(toUser.getUsername());
+                    toUser.addFriendName(fromUser.getUsername());
+                }
                 Presenter.showNotice("You are friends with "+message.getFromID()+" now.\n");
             }
             else {
