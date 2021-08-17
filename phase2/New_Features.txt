@@ -1,0 +1,69 @@
+NEW FEATURE FOR PHASE2!!!
+
+1. Mandatory extensions
+    1) Add a new template - Reminder
+        Start Menu -> Login -> Pet -> Reminder
+        User can create a reminder by their pets
+        See more in README 6) Reminder
+
+    2) Add the ability for one other kind of user to log in - Temporary user
+        Start Menu -> Other Users -> Temporary User
+        You can set the timer and create a temporary user.
+        Temporary user can do everything like regular user.
+        Temporary user account will be blocked when time is up but everything will be saved.
+        See more in README 2.4) Temporary user
+
+    3) Make one change to template - Pet
+        Now you need to enter the greeting message when create your pet
+        The greeting message will show when people view the pet
+
+    4) Allow admin users to change any of the users' creations from private to public or public to private.
+        Start Menu -> Login -> Setting -> Admin Setting -> Manage User -> Manage Users -> Enter user name -> Manage Pet/Reminder
+        See more in README 2.2) Admin user
+
+    5) Allow admin users to view, interact, delete all users' creations, no matter it's public or private
+        Start Menu -> Login -> Setting -> Admin Setting -> Manage Users -> Enter user name -> Manage Pet/Reminder
+        See more in README 2.2) Admin user
+
+    6) Allow admin user to suspend a user
+        Start Menu -> Login -> Setting -> Admin Setting -> Manage Users -> Enter user name -> Suspend User -> Set time
+        [x] = Set time by admin user
+        The selected can't login within [x] minutes
+        See more in README 2.2) Admin user
+
+2. Optional Extensions
+    1) Create a more elaborate password system
+        We strengthen the password system so users' password has to contain at least one upper case character,
+        one special character, and at least length of 6.
+        Allow user to change there password.
+        See more in README 7) Setting
+
+    2) Give the admin user more powers.
+        We set a common mailbox for admin users.
+        For user to report issue: Start Menu -> Login -> Setting -> Report Issue
+        For admin user to view reports: Start Menu -> Login -> Setting -> Admin Setting -> View Reports
+        See more in README 2.2) Admin user, 7) Setting
+
+    3) Users can have more things to do with their creations
+        Allow user to edit/delete/set public or private their creations.
+        Allow user to unfriend with each other.
+        See more in README 3) Mailbox, 4) Friends, 5) Pet, 6) Reminder
+
+    4) Internal Messaging System
+        Start Menu -> Login -> Pet -> Send Message
+        User can let their pets to send message/friend request to each other
+        User can interact with friend request to accept or ignore
+        Allow user to delete messages
+
+3. Create your own new features
+    1) Create a colorful user interface
+        Use different color to highlight different information
+        Title: blue
+        Notice: yellow
+        Error: red
+
+    2) Optimize the UI when user see empty list to make the UI smoother
+        There is no need to do the unnecessary [enter a key to continue] procedure
+
+    3) Allow users to 'like' friends certain reminder just like Tik Toc
+        The number of 'like' of each reminder will be shown when viewing the reminder list
