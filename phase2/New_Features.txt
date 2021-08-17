@@ -67,3 +67,7 @@ NEW FEATURE FOR PHASE2!!!
 
     3) Allow users to 'like' friends certain reminder just like Tik Toc
         The number of 'like' of each reminder will be shown when viewing the reminder list
+
+    4) Allow user to delete and recreate their pet
+        User will lose the previous pet
+        Start Menu -> Login -> Pet -> Edit Pet -> Re-Create Pet

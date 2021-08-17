@@ -13,7 +13,7 @@ public class PetController extends ManagerControl{
      */
     static public void petMenu() {
         while (true) {
-            Presenter.showMenu(new String[] {"See Pet", "Send message", "Set Reminder", "Edit Pet", "Back"},
+            Presenter.showMenu(new String[] {"See Pet", "Send Message", "Set Reminder", "Edit Pet", "Back"},
                     "You can do these with your pet:");
             int userChoice = GameController.getUserNum(5);
             if (userChoice == 1) {
@@ -72,10 +72,11 @@ public class PetController extends ManagerControl{
                         pet.getPetName()+". Please enter a new name...");
                 if (newPetName.equals(pet.getPetName())){
                     Presenter.showNotice("That's the same name from before!");
-                    return;
                 }
-                LocalPetManager.changePetName(user.getPetId(), newPetName);
-                Presenter.showNotice("You have changed your pet name to "+pet.getPetName()+" successfully!");
+                else {
+                    LocalPetManager.changePetName(user.getPetId(), newPetName);
+                    Presenter.showNotice("You have changed your pet name to "+pet.getPetName()+" successfully!");
+                }
             }
             else if (userChoice == 2) {
                 boolean petPublic = GameController.getUserYesOrNo(
@@ -93,7 +94,7 @@ public class PetController extends ManagerControl{
                 );
                 if (reCreatePet){
                     UserController.createUserPet();
-                    Presenter.showNotice("You have successfully created a new pet!");
+                    Presenter.showNotice("\nYou have successfully created a new pet!\n");
                 }
                 return;
             }
