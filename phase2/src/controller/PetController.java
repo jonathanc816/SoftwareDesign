@@ -13,7 +13,7 @@ public class PetController extends ManagerControl{
      */
     static public void petMenu() {
         while (true) {
-            Presenter.showMenu(new String[] {"See Pet", "Send message", "Reminder", "Edit Pet", "Back"},
+            Presenter.showMenu(new String[] {"See Pet", "Send message", "Set Reminder", "Edit Pet", "Back"},
                     "You can do these with your pet:");
             int userChoice = GameController.getUserNum(5);
             if (userChoice == 1) {
@@ -57,7 +57,7 @@ public class PetController extends ManagerControl{
     }
 
     /**
-     * Make basic changes to a pets variables.
+     * Make basic changes to a pet's variables.
      */
     static public void editPet() {
         User user = LocalUserManager.getCurrentUser();
@@ -70,6 +70,10 @@ public class PetController extends ManagerControl{
                 assert pet != null;
                 String newPetName = GameController.getUserString("Your previous pet name is "+
                         pet.getPetName()+". Please enter a new name...");
+                if (newPetName.equals(pet.getPetName())){
+                    Presenter.showNotice("That's the same name from before!");
+                    return;
+                }
                 LocalPetManager.changePetName(user.getPetId(), newPetName);
                 Presenter.showNotice("You have changed your pet name to "+pet.getPetName()+" successfully!");
             }
