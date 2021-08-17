@@ -15,7 +15,7 @@ public class GameController {
      * @return Users inputted string
      */
     static public String getUserString() {
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in); // Keep Scanner open, otherwise other instances will be unable to read from the InputStream source
         String userInput = sc.nextLine();
         System.out.println();
         return userInput;

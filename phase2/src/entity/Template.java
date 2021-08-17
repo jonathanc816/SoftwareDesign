@@ -70,7 +70,7 @@ public class Template implements Serializable {
     }
 
     /**
-     * @param instructions set the instructions for thsi template
+     * @param instructions set the instructions for this template
      */
     public void setInstructions(String[] instructions) {
         this.instructions = instructions;

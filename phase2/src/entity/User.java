@@ -2,7 +2,6 @@ package entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class User implements Serializable {
     private String username;
@@ -113,6 +112,9 @@ public class User implements Serializable {
      */
     public void addFriendName(String username) {friendList.add(username);}
 
+    /**
+     * @param username remove a username from friendlist
+     */
     public void removeFriendName(String username) {friendList.remove(username);}
 
     /**

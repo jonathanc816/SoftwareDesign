@@ -44,7 +44,7 @@ public class Message implements Serializable {
     public void setContent(String newContent){this.content = newContent;}
 
     /**
-     * @param newToID
+     * @param newToID the new ID of the message
      */
     public void setToID(String newToID){this.toID = newToID;}
 }

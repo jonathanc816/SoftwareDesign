@@ -127,7 +127,7 @@ public class ReminderController extends ManagerControl{
                         "Your reminder is "+LocalReminderManager.checkPublic(user)+" to others now.\n" +
                                 "Enter 'y' to make it public or 'n' to make it private");
                 user.setReminderPublic(reminderPublic);
-                Presenter.showNotice("You have change your pet to "+
+                Presenter.showNotice("You have change your reminder to "+
                         LocalReminderManager.checkPublic(user)+" successfully!\n");
             }
             else {
