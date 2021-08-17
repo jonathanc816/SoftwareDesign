@@ -63,9 +63,9 @@ public class PetController extends ManagerControl{
         User user = LocalUserManager.getCurrentUser();
         Pet pet = LocalPetManager.findPet(user.getPetId());
         while (true) {
-            Presenter.showMenu(new String[]{"Edit pet name", "Set pet public/private", "Back"},
+            Presenter.showMenu(new String[]{"Edit pet name", "Set pet public/private", "Re-create pet", "Back"},
                     "\nThis is the pet editor menu, you can:");
-            int userChoice = GameController.getUserNum(3);
+            int userChoice = GameController.getUserNum(4);
             if (userChoice == 1) {
                 assert pet != null;
                 String newPetName = GameController.getUserString("Your previous pet name is "+
@@ -81,6 +81,17 @@ public class PetController extends ManagerControl{
                 pet.setPublicity(petPublic);
                 Presenter.showNotice("You have change your pet to "+
                         LocalPetManager.checkPublicity(user.getPetId())+" successfully!");
+            }
+            else if (userChoice == 3){
+                boolean reCreatePet = GameController.getUserYesOrNo(
+                        "Are you sure you want to create a new pet? You will lose " + pet.getPetName()+" in the process.\n" +
+                                "Enter 'y' to create a new pet or 'n' to go back"
+                );
+                if (reCreatePet){
+                    UserController.createUserPet();
+                    Presenter.showNotice("You have successfully created a new pet!");
+                }
+                return;
             }
             else {
                 return;
